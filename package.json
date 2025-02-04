@@ -1,0 +1,23 @@
+{
+  "name": "jenny-sp2",
+  "version": "1.0.0",
+  "description": "My second semester project\r ------------------------------------------------------------------------------------------------------------------------\r File Structure\r /auction-website\r │\r ├── /assets\r │   ├── /images             # Store images (e.g., avatars, item photos)\r │   ├── /icons              # Custom icons or assets\r │   └── /fonts              # Custom fonts \r │\r ├── /components\r │   ├── /Header.js          # Main navigation component\r │   ├── /Footer.js          # Footer component\r │   ├── /ListingCard.js     # Component for individual auction listings\r │   ├── /BidForm.js         # Component to place a bid\r │   ├── /AvatarUpload.js    # Component to upload an avatar\r │   └── /LoginForm.js       # Component for the login form\r │\r ├── /pages\r │   ├── /Home.js            # Home page (displays listings)\r │   ├── /LoginPage.js       # Login page\r │   ├── /RegisterPage.js    # Registration page\r │   ├── /ProfilePage.js     # User profile page (credits, avatar)\r │   ├── /ListingPage.js     # Page showing details of a specific listing\r │   └── /CreateListingPage.js # Page for creating a new listing\r │\r ├── /services\r │   ├── /api.js             # Handles all API requests (e.g., GET/POST requests to the Auction API)\r │   ├── /authService.js     # Functions related to user authentication (login, registration)\r │   ├── /listingService.js  # Functions to manage auction listings (fetch, create, etc.)\r │   └── /bidService.js      # Functions related to placing and viewing bids\r │\r ├── /styles\r │   ├── /globals.css        # Global CSS for the entire app \r │   └── /tailwind.config.js # Tailwind CSS configuration file \r │\r ├── /utils\r │   ├── /helpers.js         # Helper functions (e.g., date formatting, validation)\r │   └── /storage.js         # Local storage utility (e.g., handling user session)\r │\r ├── /assets\r │   ├── /icons\r │   └── /images\r │\r ├── /tests\r │   ├── /api.test.js        # Unit tests for API interactions\r │   ├── /auth.test.js       # Unit tests for authentication (login, register)\r │   └── /ui.test.js         # UI component tests (e.g., rendering, user interactions)\r │\r ├── index.html              # Main HTML file, entry point for the app\r ├── app.js                  # Main JavaScript file (app logic, routing, etc.)\r ├── README.md               # Project documentation (setup, instructions, etc.)\r ├── .gitignore              # List of files/folders to be ignored by Git (node_modules, build files, etc.)\r ├── package.json            # Dependencies and project metadata (npm/yarn)\r ├── tailwind.config.js      # Tailwind CSS configuration\r ├── postcss.config.js       # PostCSS configuration\r └── webpack.config.js       # Webpack config \r ------------------------------------------------------------------------------------------------------------------------",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JennyJohnsby/jenny-sp2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JennyJohnsby/jenny-sp2/issues"
+  },
+  "homepage": "https://github.com/JennyJohnsby/jenny-sp2#readme"
+}
