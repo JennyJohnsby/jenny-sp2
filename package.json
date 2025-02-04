@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/JennyJohnsby/jenny-sp2/issues"
   },
-  "homepage": "https://github.com/JennyJohnsby/jenny-sp2#readme"
+  "homepage": "https://github.com/JennyJohnsby/jenny-sp2#readme",
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  }
 }
