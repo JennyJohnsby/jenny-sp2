@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bid For Forest</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
     <script type="module" src="/src/app.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,20 +19,21 @@
     />
   </head>
   <body class="bg-teal-950 text-amber-100 text-2xl">
-    <header>
+    <header role="banner">
       <div
         class="bg-cover bg-fixed"
         style="
           background-image: url(https://images.unsplash.com/photo-1516214104703-d870798883c5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
           height: 700px;
         "
+        aria-hidden="true"
       ></div>
       <div class="font-medium flex justify-center items-center flex-col">
         <h1 class="text-5xl m-10">Bid For Forest</h1>
         <p>Bid Smart, Grow Green!</p>
       </div>
     </header>
-    <main class="m-10">
+    <main class="m-10 max-w-3xl">
       <h2>
         Welcome to Bid for Forest – Where Every Bid Grows a Greener Future!
       </h2>
@@ -50,7 +57,7 @@
         class="flex flex-col items-center space-y-1"
         id="nav-login"
       >
-        <p>Sign In</p>
+        <p>Sign In To Your Account</p>
       </a>
 
       <a
@@ -58,7 +65,7 @@
         class="flex flex-col items-center space-y-1"
         id="nav-register"
       >
-        <p>Register A User</p>
+        <p>Create A New User Account</p>
       </a>
     </nav>
   </body>
