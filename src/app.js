@@ -1,4 +1,4 @@
-import "./css/style.css";
+import "./style.css";
 
 import router from "./js/router";
 
