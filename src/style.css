@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* This is styles for the banner */
+
+/* Banner base styles */
+.banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 15px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    animation: slideDown 0.5s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.6); /* Default transparent dark background */
+}
+
+/* Banner types */
+.banner--success {
+    background-color: #4CAF50;  /* A vibrant green */
+}
+
+.banner--error {
+    background-color: #FF5733;  /* A bold red */
+}
+
+.banner--warning {
+    background-color: #FFB74D;  /* A soft yellow-orange */
+}
+
+/* Banner Icon (if you decide to add icons back later) */
+.banner__icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+/* Close button */
+.banner__close {
+    cursor: pointer;
+    font-size: 18px;
+    background: none;
+    border: none;
+    color: white;
+}
+
+/* Slide-in animation */
+@keyframes slideDown {
+    0% {
+        top: -100px;
+    }
+    100% {
+        top: 0;
+    }
+}

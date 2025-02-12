@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bid for Forest: A sustainable auction platform where every bid helps conserve nature."
+    />
     <title>Bid For Forest</title>
     <link
       rel="icon"
@@ -18,55 +22,65 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-teal-950 text-amber-100 text-2xl">
-    <header role="banner">
-      <div
-        class="bg-cover bg-fixed"
-        style="
-          background-image: url(https://images.unsplash.com/photo-1516214104703-d870798883c5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-          height: 700px;
-        "
-        aria-hidden="true"
-      ></div>
-      <div class="font-medium flex justify-center items-center flex-col">
-        <h1 class="text-5xl m-10">Bid For Forest</h1>
-        <p>Bid Smart, Grow Green!</p>
-      </div>
-    </header>
-    <main class="m-10 max-w-3xl">
-      <h2>
-        Welcome to Bid for Forest – Where Every Bid Grows a Greener Future!
-      </h2>
-      <p>
-        At Bid for Forest, we believe that commerce and conservation can go hand
-        in hand. Our eco-conscious auction platform lets you buy and sell unique
-        items while making a positive impact on the planet. Sustainable Auctions
-        – Bid on eco-friendly products, preloved treasures, and exclusive green
-        deals.Giving Back to Nature – A portion of every transaction supports
-        reforestation and environmental projects. Join a Community That Cares –
-        Whether you're a buyer or seller, your actions contribute to a healthier
-        planet. Start bidding today and turn every purchase into a step toward a
-        greener world!
-      </p>
-    </main>
-    <nav
-      class="fixed bottom-0 left-0 w-full bg-teal-900 flex justify-around items-center py-4"
+  <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
+    <!-- Header -->
+    <header
+      role="banner"
+      class="py-8 text-center bg-cover bg-center h-72"
+      style="background-image: url(./assets/alexander-62h8IRF5xDU-unsplash.jpg)"
     >
-      <a
-        href="/auth/login/"
-        class="flex flex-col items-center space-y-1"
-        id="nav-login"
-      >
-        <p>Sign In To Your Account</p>
-      </a>
-
-      <a
-        href="/auth/register/"
-        class="flex flex-col items-center space-y-1"
-        id="nav-register"
-      >
-        <p>Create A New User Account</p>
-      </a>
+      <h1 class="text-4xl font-bold">Welcome to Bid For Forest</h1>
+      <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
+    </header>
+    <!-- Navigation -->
+    <nav class="sticky top-0 bg-teal-900 py-4">
+      <div class="flex justify-around items-center">
+        <a
+          href="/auth/login/"
+          class="flex flex-col items-center space-y-1"
+          id="nav-login"
+        >
+          <p>Sign In To Your Account</p>
+        </a>
+        <a
+          href="/auth/register/"
+          class="flex flex-col items-center space-y-1"
+          id="nav-register"
+        >
+          <p>Create A New User Account</p>
+        </a>
+      </div>
     </nav>
+    <!-- Main Content -->
+    <main class="max-w-3xl w-full mx-auto mt-10 flex-grow px-6">
+      <h2 class="text-3xl font-semibold text-center mb-6">
+        How It Works: Bid, Win, and Contribute to Nature
+      </h2>
+      <p class="mb-6">
+        At Bid for Forest, we believe commerce and conservation go hand in hand.
+        Our eco-conscious auction platform lets you buy and sell unique items
+        while making a positive impact on the planet.
+        <strong>Every bid grows a greener future!</strong>
+      </p>
+      <!-- Search Bar -->
+      <div class="flex justify-center mb-6">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search auctions..."
+          class="w-full max-w-lg p-3 rounded-md border border-gray-300 text-gray-800"
+        />
+      </div>
+      <h3 class="text-2xl font-medium text-center mb-4">All Auctions</h3>
+      <div id="listingContainer"></div>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
+    >
+      <p>&copy; 2025 Bid For Forest. All rights reserved.</p>
+      <span class="hidden md:block">|</span>
+      <p>Developed by Jenny Johnsby</p>
+    </footer>
   </body>
 </html>
