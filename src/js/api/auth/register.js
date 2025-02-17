@@ -1,6 +1,6 @@
-import { API_AUTH_REGISTER } from "../constants"; // Ensure this constant holds the correct registration URL
-import { onRegister } from "../../ui/auth/register"; // Function that handles form submission
-import { authGuard } from "../../utilities/authGuard.js"; // Handles authentication state
+import { API_AUTH_REGISTER } from "../constants";
+import { onRegister } from "../../ui/auth/register";
+import { authGuard } from "../../utilities/authGuard.js";
 
 /**
  * Registers a new user with the provided details by sending a POST request
@@ -24,43 +24,35 @@ import { authGuard } from "../../utilities/authGuard.js"; // Handles authenticat
  */
 export async function registerUser(data) {
   try {
-    // Send the POST request to register the user
     const response = await fetch(API_AUTH_REGISTER, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Indicating that we are sending JSON data
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data), // Send the registration data as JSON
+      body: JSON.stringify(data),
     });
 
-    // If the response is not successful (not in the 2xx range)
     if (!response.ok) {
-      const errorDetails = await response.json(); // Parse error response
+      const errorDetails = await response.json();
       console.error("Server error details:", errorDetails);
 
-      // Extract the first error message if available, else provide a default message
       const message =
         errorDetails.errors?.[0]?.message || "Failed to register user";
-      throw new Error(message); // Throw the error for further handling
+      throw new Error(message);
     }
 
-    // Return the successful registration response as JSON
     return await response.json();
   } catch (error) {
-    console.error("Registration error:", error); // Log any errors encountered
-    throw error; // Propagate the error for further handling
+    console.error("Registration error:", error);
+    throw error;
   }
 }
 
-// Event listener to run the code when the DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Guard against unauthorized access or handle authentication state
   authGuard(true);
 
-  // Ensure the form exists before attaching the submit event handler
   const registerForm = document.getElementById("registerForm");
   if (registerForm) {
-    // Attach the onRegister function to handle form submissions
     registerForm.addEventListener("submit", onRegister);
     console.log("Register form is now connected to onRegister");
   } else {

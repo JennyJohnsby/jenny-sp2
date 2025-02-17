@@ -1,7 +1,6 @@
 import { API_AUTH_LOGIN } from "../constants";
 import { authGuard } from "../../utilities/authGuard.js";
 
-// Redirects if the user is already logged in
 document.addEventListener("DOMContentLoaded", () => {
   authGuard(true);
 });
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 export async function login({ email, password }) {
   try {
-    // Send login request to the API
     const response = await fetch(API_AUTH_LOGIN, {
       method: "POST",
       headers: {
@@ -31,10 +29,10 @@ export async function login({ email, password }) {
 
       const errorMessage =
         errorData.errors?.[0]?.message || "Failed to log in user";
-      throw new Error(errorMessage); // Handle errors gracefully
+      throw new Error(errorMessage);
     }
 
-    const result = await response.json(); // Parse the successful response
+    const result = await response.json();
     console.log("Full login response:", result);
 
     const token = result.data?.accessToken;
@@ -43,7 +41,6 @@ export async function login({ email, password }) {
       throw new Error("Login successful, but no token was returned.");
     }
 
-    // Store token and user data in localStorage
     localStorage.setItem("accessToken", token);
     const user = {
       name: result.data.name,
@@ -56,9 +53,9 @@ export async function login({ email, password }) {
 
     console.log("User data and token stored successfully:", user);
 
-    return result.data; // Return the user data (with token) to be used elsewhere
+    return result.data;
   } catch (error) {
     console.error("Login failed:", error.message);
-    throw error; // Propagate error for further handling
+    throw error;
   }
 }

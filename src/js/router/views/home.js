@@ -1,7 +1,6 @@
-// Function to handle search
 function setupSearch(listings) {
   const searchInput = document.getElementById("searchInput");
-  if (!searchInput) return; // Ensure input exists
+  if (!searchInput) return;
 
   searchInput.addEventListener("input", (event) => {
     const query = event.target.value.toLowerCase();
@@ -94,12 +93,11 @@ function renderListings(listings) {
 
     // ✅ Navigate to listing details when clicked
     listingElement.addEventListener("click", () => {
-      window.location.href = `/listings/index.html?id=${listing.id}`;
+      window.location.href = `/listings/?id=${listing.id}`;
     });
 
     listingContainer.appendChild(listingElement);
   });
 }
 
-// Call function on page load
 fetchAndDisplayListings();
