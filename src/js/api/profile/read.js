@@ -1,4 +1,4 @@
-import { API_PROFILES, API_KEY } from "../../api/constants";
+import { API_PROFILE, API_KEY } from "../constants";
 
 // Function to fetch profile data
 export async function readProfile() {
@@ -15,8 +15,8 @@ export async function readProfile() {
     return null;
   }
 
-  // Construct URL for the profile API endpoint
-  const url = `${API_PROFILES}/${usernameFromStorage}`;
+  // Use the correct URL constant to fetch the profile
+  const url = `${API_PROFILE}/${usernameFromStorage}`; // API endpoint for a single profile
 
   try {
     // Fetch profile data from the API
@@ -24,21 +24,19 @@ export async function readProfile() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        "X-Noroff-API-Key": API_KEY,
+        Authorization: `Bearer ${token}`, // Authorization token
+        "X-Noroff-API-Key": API_KEY, // API Key for authentication
       },
     });
 
     // If the response status is not in the 200 range, handle different cases
     if (!response.ok) {
-      // If unauthorized (401), notify the user
+      // Handle unauthorized or not found errors
       if (response.status === 401) {
         console.error("Unauthorized access. Please log in again.");
       } else if (response.status === 404) {
-        // If the profile is not found (404), notify the user
         console.error(`Profile for ${usernameFromStorage} not found.`);
       } else {
-        // Generic error message for other HTTP errors
         console.error(
           `Failed to fetch profile for ${usernameFromStorage}: ${response.statusText}`,
         );
@@ -46,14 +44,13 @@ export async function readProfile() {
       return null;
     }
 
-    // Parse the response JSON
+    // Parse and return the profile data
     const { data } = await response.json();
     console.log("Profile data fetched:", data);
 
-    // Return the profile data
     return data;
   } catch (error) {
-    // Catch network or other unexpected errors
+    // Handle unexpected errors
     console.error("Error fetching profile:", error);
     return null;
   }

@@ -1,15 +1,18 @@
 import { readProfile } from "../../api/profile/read.js";
 import { authGuard } from "../../utilities/authGuard";
 
-authGuard(); // Ensure the user is logged in
+// Ensure the user is logged in before proceeding
+authGuard();
 
 // Function to display the user's profile
 async function showProfile() {
-  console.log("Fetching profile...");
+  const profileDiv = document.getElementById("profile");
+
+  // Show loading indicator while fetching data
+  profileDiv.innerHTML = "<p>Loading profile...</p>";
 
   try {
-    const profile = await readProfile(); // Assuming this fetches the profile data
-    const profileDiv = document.getElementById("profile");
+    const profile = await readProfile(); // Fetch profile data
 
     // Check if profile data exists
     if (profile) {
@@ -44,7 +47,7 @@ async function showProfile() {
     }
   } catch (error) {
     console.error("Error fetching profile:", error);
-    document.getElementById("profile").innerHTML =
+    profileDiv.innerHTML =
       "<p>Unable to load your profile. Please try again later.</p>";
   }
 }
