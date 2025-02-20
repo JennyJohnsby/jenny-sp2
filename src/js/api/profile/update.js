@@ -1,18 +1,4 @@
-/**
- * Updates an existing user profile by sending updated data to the API.
- *
- * @param {Object} params - The updated profile parameters.
- * @param {string} [params.bio] - The updated bio of the user (optional).
- * @param {Object} [params.avatar] - Updated avatar object containing URL and alt text (optional).
- * @param {string} [params.avatar.url] - The updated URL of the avatar image.
- * @param {string} [params.avatar.alt] - Updated alt text for the avatar image.
- * @param {Object} [params.banner] - Updated banner object containing URL and alt text (optional).
- * @param {string} [params.banner.url] - The updated URL of the banner image.
- * @param {string} [params.banner.alt] - Updated alt text for the banner image.
- * @param {File} [params.avatarFile] - The avatar file to upload (optional).
- * @returns {Promise<Object>} The updated profile data from the API.
- * @throws {Error} If the API request fails.
- */
+import { API_KEY } from "../constants";
 export async function updateProfile({ bio, avatar, banner, avatarFile }) {
   // Get user info from localStorage
   const userInLocalStorage = JSON.parse(localStorage.getItem("currentUser"));
@@ -26,7 +12,7 @@ export async function updateProfile({ bio, avatar, banner, avatarFile }) {
   // Define the API URL for updating the profile
   const url = `https://v2.api.noroff.dev/auction/profiles/${username}`;
 
-  // Check if at least one of the fields (bio, avatar, or banner) is provided
+  // Check if at least one of the fields (bio, avatar, banner, or avatarFile) is provided
   if (!bio && !avatar && !banner && !avatarFile) {
     throw new Error(
       "At least one of bio, avatar, banner, or avatarFile must be provided.",
@@ -54,6 +40,7 @@ export async function updateProfile({ bio, avatar, banner, avatarFile }) {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": API_KEY, // Use the imported API key
         },
         body: formData, // Send the formData (with the avatar file)
       });
@@ -64,6 +51,7 @@ export async function updateProfile({ bio, avatar, banner, avatarFile }) {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": API_KEY, // Use the imported API key
         },
         body: JSON.stringify(profileData), // Send profile data as a JSON string
       });
