@@ -22,37 +22,151 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-teal-950 text-amber-100 text-2xl">
-    <main>
-      <form id="createPost">
-        <h2>Create a New Post</h2>
+  <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
+    <!-- Header -->
+    <header
+      role="banner"
+      class="py-8 text-center bg-cover bg-center h-72"
+      style="
+        background-image: url(../../assets/imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg);
+      "
+    >
+      <h1 class="text-4xl font-bold">Welcome to Bid For Forest</h1>
+      <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
+    </header>
+    <!-- Navigation -->
+    <nav class="top-0 bg-teal-900 py-4">
+      <div class="flex justify-around items-center">
+        <a
+          href="/profile/"
+          class="flex flex-col items-center space-y-1"
+          id="nav-profile"
+        >
+          Profile</a
+        >
+        <a
+          href="../../"
+          class="flex flex-col items-center space-y-1"
+          id="nav-auctions"
+        >
+          Auctions</a
+        >
+      </div>
+    </nav>
+    <main class="max-w-3xl w-full mx-auto mt-10 flex-grow px-6">
+      <h2 class="text-3xl font-semibold text-center mb-6">
+        How It Works: Bid, Win, and Contribute to Nature
+      </h2>
+      <p class="mb-6">
+        At Bid for Forest, we believe commerce and conservation go hand in hand.
+        Our eco-conscious auction platform lets you buy and sell unique items
+        while making a positive impact on the planet.
+        <strong>Every bid grows a greener future!</strong>
+      </p>
+      <!-- Create Listing Form -->
+      <form id="createListing" class="bg-teal-800 p-8 rounded-2xl shadow-lg">
+        <h2 class="text-2xl font-semibold text-center mb-4">
+          Create a New Listing
+        </h2>
 
         <!-- Title -->
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" required />
+        <div class="mb-4">
+          <label for="title" class="block font-medium mb-1">Title</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            required
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
 
-        <!-- Body -->
-        <label for="body">Body</label>
-        <textarea name="body" id="body" rows="4"></textarea>
+        <!-- Description -->
+        <div class="mb-4">
+          <label for="description" class="block font-medium mb-1"
+            >Description</label
+          >
+          <textarea
+            name="description"
+            id="description"
+            rows="4"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          ></textarea>
+        </div>
 
         <!-- Tags -->
-        <label for="tags">Tags (comma-separated)</label>
-        <input type="text" name="tags" id="tags" />
+        <div class="mb-4">
+          <label for="tags" class="block font-medium mb-1"
+            >Tags (comma-separated)</label
+          >
+          <input
+            type="text"
+            name="tags"
+            id="tags"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
 
         <!-- Media URL -->
-        <label for="mediaUrl">Media URL</label>
-        <input type="url" name="mediaUrl" id="mediaUrl" />
+        <div class="mb-4">
+          <label for="mediaUrl" class="block font-medium mb-1">Media URL</label>
+          <input
+            type="url"
+            name="mediaUrl"
+            id="mediaUrl"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
 
         <!-- Media Alt Text -->
-        <label for="mediaAlt">Media Alt Text</label>
-        <input type="text" name="mediaAlt" id="mediaAlt" />
+        <div class="mb-4">
+          <label for="mediaAlt" class="block font-medium mb-1"
+            >Media Alt Text</label
+          >
+          <input
+            type="text"
+            name="mediaAlt"
+            id="mediaAlt"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
+
+        <!-- End Date (endsAt) -->
+        <div class="mb-4">
+          <label for="endsAt" class="block font-medium mb-1">End Date</label>
+          <input
+            type="datetime-local"
+            name="endsAt"
+            id="endsAt"
+            required
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
 
         <!-- Buttons -->
-        <div>
-          <a href="/profile/" id="cancelButton"> Cancel </a>
-          <button type="submit">Create Post</button>
+        <div class="flex justify-between items-center mt-6">
+          <a
+            href="/profile/"
+            class="px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition"
+          >
+            Cancel
+          </a>
+          <button
+            type="submit"
+            class="px-4 py-2 bg-amber-600 text-teal-900 font-bold rounded-lg hover:bg-amber-500 transition"
+          >
+            Create Listing
+          </button>
         </div>
       </form>
     </main>
+    <!-- Footer -->
+    <footer
+      class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
+    >
+      <p>&copy; 2025 Bid For Forest. All rights reserved.</p>
+      <span class="hidden md:block">|</span>
+      <p>Developed by Jenny Johnsby</p>
+    </footer>
   </body>
 </html>

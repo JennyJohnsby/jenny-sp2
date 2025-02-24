@@ -1,4 +1,5 @@
 import { readListing } from "../../api/listing/read.js";
+import { deleteListing } from "../../api/listing/delete.js";
 
 async function fetchAndDisplayListing() {
   const listingId = new URLSearchParams(window.location.search).get("id");
@@ -11,29 +12,67 @@ async function fetchAndDisplayListing() {
     renderSingleListing(listing);
   } catch (err) {
     console.error(err);
-    listingContainer.innerHTML = `<p>Failed to load the listing.</p>`;
+    listingContainer.innerHTML = `<p class="text-red-500 text-center">Failed to load the listing.</p>`;
   }
 }
 
-function renderSingleListing(response) {
-  const listing = response;
+function renderSingleListing(listing) {
   const listingContainer = document.getElementById("listingDetailContainer");
 
   if (!listingContainer) return;
 
   listingContainer.innerHTML = `
-    <div class="listing__image-container">
-      ${listing.media?.[0]?.url ? `<img src="${listing.media[0].url}" alt="${listing.media[0].alt || "Listing image"}" class="listing__image" />` : `<div class="listing__no-image">No Image Available</div>`}
-    </div>
-    <div class="listing__content">
-      <h2 class="listing__title">${listing.title || "Untitled"}</h2>
-      <p class="listing__description">${listing.description || "No description available."}</p>
-      <div class="listing__tags">
-        ${listing.tags?.length ? listing.tags.map((tag) => `<span class="listing__tag">#${tag}</span>`).join("") : "<span>No tags available.</span>"}
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-20 p-6">
+      <!-- Image Section -->
+      <div class="relative">
+        ${
+          listing.media?.[0]?.url
+            ? `<img src="${listing.media[0].url}" alt="${listing.media[0].alt || "Listing image"}" class="w-full h-96 object-cover rounded-lg" />`
+            : `<div class="w-full h-96 bg-gray-200 flex items-center justify-center text-gray-500 rounded-lg">No Image Available</div>`
+        }
       </div>
-      <span class="listing__created">${new Date(listing.created).toLocaleString()}</span>
+
+      <!-- Content Section -->
+      <div class="mt-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">${listing.title || "Untitled"}</h2>
+        <p class="text-gray-600 text-lg mb-4">${listing.description || "No description available."}</p>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          ${
+            listing.tags?.length
+              ? listing.tags
+                  .map(
+                    (tag) =>
+                      `<span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-md">#${tag}</span>`,
+                  )
+                  .join(" ")
+              : `<span class="text-gray-500">No tags available.</span>`
+          }
+        </div>
+
+        <!-- Additional Information -->
+        <div class="mt-4 text-gray-700">
+          <p><span class="font-semibold">Created on:</span> ${new Date(listing.created).toLocaleString()}</p>
+          <p><span class="font-semibold">Ends at:</span> ${new Date(listing.endsAt).toLocaleString()}</p>
+          <p><span class="font-semibold">Number of bids:</span> ${listing._count?.bids || 0}</p>
+        </div>
+
+        <!-- Delete Button -->
+        <div class="mt-6">
+          <button id="delete-listing-button" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete Listing</button>
+        </div>
+      </div>
     </div>
   `;
+
+  // Add event listener for the delete button
+  const deleteButton = document.getElementById("delete-listing-button");
+  if (deleteButton) {
+    deleteButton.addEventListener("click", () => {
+      deleteListing(listing.id); // Call delete function with listing ID
+    });
+  }
 }
 
 fetchAndDisplayListing();

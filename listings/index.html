@@ -27,13 +27,37 @@
     <header
       role="banner"
       class="py-8 text-center bg-cover bg-center h-72"
-      style="background-image: url(./assets/alexander-62h8IRF5xDU-unsplash.jpg)"
+      style="
+        background-image: url(../assets/noah-buscher-x8ZStukS2PM-unsplash.jpg);
+      "
     >
       <h1 class="text-4xl font-bold">Bid For Forest</h1>
       <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
     </header>
+    <!-- Navigation -->
+    <nav class="top-0 bg-teal-900 py-4">
+      <div class="flex justify-around items-center">
+        <a
+          href="/profile/"
+          class="flex flex-col items-center space-y-1"
+          id="nav-profile"
+        >
+          Profile</a
+        >
+        <a
+          href="../../"
+          class="flex flex-col items-center space-y-1"
+          id="nav-auctions"
+        >
+          Auctions</a
+        >
+      </div>
+    </nav>
     <!-- Main Content -->
     <main class="max-w-3xl w-full mx-auto mt-10 flex-grow px-6">
+      <h2 class="text-3xl font-semibold text-center mb-6">
+        How It Works: Bid, Win, and Contribute to Nature
+      </h2>
       <p class="mb-6">
         At Bid for Forest, we believe commerce and conservation go hand in hand.
         Our eco-conscious auction platform lets you buy and sell unique items
@@ -42,25 +66,7 @@
       </p>
       <div id="listingDetailContainer"></div>
     </main>
-    <!-- Navigation -->
-    <nav
-      class="bottom-0 left-0 w-full bg-teal-900 flex justify-around items-center py-4 mt-8"
-    >
-      <a
-        href="/auth/login/"
-        class="flex flex-col items-center space-y-1"
-        id="nav-login"
-      >
-        <p>Sign In To Your Account</p>
-      </a>
-      <a
-        href="/auth/register/"
-        class="flex flex-col items-center space-y-1"
-        id="nav-register"
-      >
-        <p>Create A New User Account</p>
-      </a>
-    </nav>
+
     <!-- Footer -->
     <footer
       class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"

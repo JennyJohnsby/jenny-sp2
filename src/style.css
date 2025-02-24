@@ -187,7 +187,7 @@
 }
 
 .update-button {
-  background-color: #f59e0b;
+  background-color: #faac25;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -201,6 +201,20 @@
   background-color: #f59e0b;
 }
 
+.create-listing-button {
+  background-color: #faac25;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.create-listing-button:hover {
+  background-color: #f59e0b;
+}
 /* Logout Button Styling */
 .logout-button {
   background-color: #f44336;

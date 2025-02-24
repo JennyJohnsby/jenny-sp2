@@ -3,6 +3,6 @@ import { authGuard } from "../../utilities/authGuard";
 
 authGuard();
 
-console from = document.forms.createListing;
+const form = document.forms.createListing;
 
 form.addEventListener("submit", onCreateListing);
