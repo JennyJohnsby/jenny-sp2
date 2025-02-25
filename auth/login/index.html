@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bid for Forest: A sustainable auction platform where every bid helps conserve nature."
+    />
+    <title>Bid For Forest</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
+    <script type="module" src="/src/app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
+    <!-- Header -->
+    <header
+      role="banner"
+      class="py-8 text-center bg-cover bg-center h-72"
+      style="
+        background-image: url(../../assets/noah-buscher-x8ZStukS2PM-unsplash.jpg);
+      "
+    >
+      <h1 class="text-4xl font-bold">Welcome to Bid For Forest</h1>
+      <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
+    </header>
+    <!-- Navigation -->
+    <nav class="sticky top-0 bg-teal-900 py-4">
+      <ul class="flex justify-center gap-4">
+        <li><a href="/">Auctions</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/terms-conditions/">Terms & Conditions</a></li>
+      </ul>
+    </nav>
+    <!-- Main Content -->
+    <main class="max-w-lg w-full mx-auto mt-10 flex-grow">
+      <h2 class="text-3xl font-semibold text-center mb-6">Login</h2>
+      <!-- form -->
+      <form
+        name="login"
+        id="login-form"
+        class="bg-teal-800 p-8 rounded-2xl shadow-lg"
+      >
+        <fieldset class="flex flex-col gap-6">
+          <!-- Email Field -->
+          <div>
+            <label for="login-email" class="block text-base font-medium">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              autocomplete="email"
+              required
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              id="login-email"
+              placeholder="Enter your email here!"
+            />
+          </div>
+
+          <!-- Password Field -->
+          <div>
+            <label for="login-password" class="block text-base font-medium">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              autocomplete="current-password"
+              required
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              id="login-password"
+              placeholder="Enter your password here!"
+            />
+          </div>
+
+          <!-- Login Button -->
+          <button
+            type="submit"
+            class="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-amber-300"
+          >
+            Log In
+          </button>
+
+          <!-- Register Link -->
+          <p class="text-center">
+            Not registered yet?
+            <a
+              href="/auth/register/"
+              class="text-amber-300 hover:text-amber-400 underline"
+              >Register here</a
+            >
+          </p>
+        </fieldset>
+      </form>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
+    >
+      <p>&copy; 2025 Bid For Forest. All rights reserved.</p>
+      <span class="hidden md:block">|</span>
+      <p>Developed by Jenny Johnsby</p>
+    </footer>
+  </body>
+</html>
