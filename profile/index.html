@@ -34,18 +34,40 @@
       <h1 class="text-4xl font-bold">Profile</h1>
       <p class="mt-2 text-lg">View and manage your profile details.</p>
     </header>
+
     <!-- Navigation -->
-    <nav class="sticky top-0 bg-teal-900 py-4">
-      <ul class="flex justify-center gap-4">
-        <li><a href="/">Auctions</a></li>
-        <li><a href="/contact/">Contact</a></li>
-        <li><a href="/terms-conditions/">Terms & Conditions</a></li>
-      </ul>
+    <nav class="top-0 bg-teal-900 py-4">
+      <div class="flex justify-around items-center">
+        <a
+          href="../../"
+          class="flex flex-col items-center space-y-1"
+          id="nav-auctions"
+        >
+          Auctions
+        </a>
+        <!-- Additional navigation links can be added here -->
+        <a
+          href="../../profile"
+          class="flex flex-col items-center space-y-1"
+          id="nav-profile"
+        >
+          Profile
+        </a>
+        <a
+          href="../../settings"
+          class="flex flex-col items-center space-y-1"
+          id="nav-settings"
+        >
+          Settings
+        </a>
+      </div>
     </nav>
+
     <!-- Main content -->
     <main class="flex-grow">
-      <div id="profile"></div>
+      <div id="profile" class="px-4 py-8"></div>
     </main>
+
     <!-- Footer -->
     <footer
       class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
@@ -54,5 +76,13 @@
       <span class="hidden md:block">|</span>
       <p>Developed by Jenny Johnsby</p>
     </footer>
+
+    <!-- Optional: Add a modal for error or success messages if needed -->
+    <div
+      id="banner-container"
+      class="fixed top-0 left-0 right-0 bg-teal-800 text-white p-4 hidden"
+    >
+      <p id="banner-message"></p>
+    </div>
   </body>
 </html>

@@ -28,12 +28,13 @@
       role="banner"
       class="py-8 text-center bg-cover bg-center h-72"
       style="background-image: url(./assets/alexander-62h8IRF5xDU-unsplash.jpg)"
+      alt="a forest squirrle sitting in a tree eating on a pinecone "
     >
       <h1 class="text-4xl font-bold">Welcome to Bid For Forest</h1>
       <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
     </header>
     <!-- Navigation -->
-    <nav class="sticky top-0 bg-teal-900 py-4">
+    <nav class="top-0 bg-teal-900 py-4">
       <div class="flex justify-around items-center">
         <a
           href="/auth/login/"
@@ -49,6 +50,13 @@
         >
           <p>Create A New User Account</p>
         </a>
+        <a
+          href="/profile/"
+          class="flex flex-col items-center space-y-1"
+          id="nav-profile"
+        >
+          Profile</a
+        >
       </div>
     </nav>
     <!-- Main Content -->
@@ -69,6 +77,20 @@
           id="searchInput"
           placeholder="Search auctions..."
           class="w-full max-w-lg p-3 rounded-md border border-gray-300 text-gray-800"
+        />
+      </div>
+      <!-- Filter Toggle -->
+      <div class="flex items-center justify-center mb-6">
+        <label
+          for="filterToggle"
+          class="text-lg font-semibold text-amber-500 mr-2"
+          >Filter by Bid For Forest Tag:</label
+        >
+        <input
+          type="checkbox"
+          id="filterToggle"
+          class="w-6 h-6 rounded-full border-2 border-teal-500 accent-teal-500 cursor-pointer transition duration-300 ease-in-out hover:border-teal-700 focus:outline-none"
+          checked
         />
       </div>
       <h3 class="text-2xl font-medium text-center mb-4">All Auctions</h3>

@@ -35,12 +35,30 @@
       <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
     </header>
     <!-- Navigation -->
-    <nav class="sticky top-0 bg-teal-900 py-4">
-      <ul class="flex justify-center gap-4">
-        <li><a href="/">Auctions</a></li>
-        <li><a href="/contact/">Contact</a></li>
-        <li><a href="/terms-conditions/">Terms & Conditions</a></li>
-      </ul>
+    <nav class="top-0 bg-teal-900 py-4">
+      <div class="flex justify-around items-center">
+        <a
+          href="/auth/register/"
+          class="flex flex-col items-center space-y-1"
+          id="nav-register"
+        >
+          <p>Create A New User Account</p>
+        </a>
+        <a
+          href="/profile/"
+          class="flex flex-col items-center space-y-1"
+          id="nav-profile"
+        >
+          Profile</a
+        >
+        <a
+          href="/"
+          class="flex flex-col items-center space-y-1"
+          id="nav-auctions"
+        >
+          Auctions</a
+        >
+      </div>
     </nav>
     <!-- Main Content -->
     <main class="max-w-lg w-full mx-auto mt-10 flex-grow">
