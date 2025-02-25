@@ -1,29 +1,58 @@
-export async function updateListing(listingId, updatedData) {
-  const payload = {};
+export async function updateListing(id, { title, description, tags, media }) {
+  const url = `https://v2.api.noroff.dev/auction/listings/${id}`;
 
-  if (updatedData.title) payload.title = updatedData.title;
-  if (updatedData.description) payload.description = updatedData.description;
-  if (updatedData.tags) payload.tags = updatedData.tags;
+  console.log("Updating Listing:", { id, title, description, tags, media });
 
-  if (updatedData.media) {
-    payload.media = updatedData.media.map((item) => ({
-      url: item.url,
-      alt: item.alt,
-    }));
+  // Retrieve token correctly
+  const accessToken =
+    localStorage.getItem("accessToken") || localStorage.getItem("authToken");
+
+  if (!accessToken) {
+    console.error("No token found. Redirecting to login.");
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 2000);
+    throw new Error("No token found. Please log in.");
   }
 
-  const response = await fetch(`/auction/listings/${listingId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-    },
-    body: JSON.stringify(payload),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to update listing");
+  // Ensure title is provided
+  if (!title || title.trim() === "") {
+    console.error("Title is required.");
+    throw new Error("Title is required.");
   }
 
-  return await response.json();
+  // Construct listingData, excluding `media` if empty
+  const listingData = {
+    title: title.trim(),
+    description: description?.trim() || "",
+    tags: Array.isArray(tags) ? tags.map((tag) => tag.trim()) : [],
+    media: Array.isArray(media) && media.length > 0 ? media : [],
+  };
+
+  console.log("Final Listing Data to Send:", listingData);
+
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        "X-Noroff-API-Key": "95144b64-e941-4738-b289-cc867b27e27c",
+      },
+      body: JSON.stringify(listingData),
+    });
+
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      console.error("API Error:", errorDetails);
+      throw new Error(`Error: ${errorDetails.message || response.statusText}`);
+    }
+
+    const updatedListing = await response.json();
+    console.log("Updated Listing Response:", updatedListing);
+    return updatedListing;
+  } catch (error) {
+    console.error("Failed to update listing:", error);
+    throw error;
+  }
 }

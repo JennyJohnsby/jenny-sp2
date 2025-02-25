@@ -58,9 +58,17 @@ function renderSingleListing(listing) {
           <p><span class="font-semibold">Number of bids:</span> ${listing._count?.bids || 0}</p>
         </div>
 
-        <!-- Delete Button -->
-        <div class="mt-6">
-          <button id="delete-listing-button" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete Listing</button>
+          <!-- Buttons (Edit & Delete) -->
+        <div class="mt-6 flex gap-4">
+          <!-- Update Listing Button -->
+          <a href="edit/?id=${listing.id}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+            Edit Listing
+          </a>
+
+          <!-- Delete Listing Button -->
+          <button id="delete-listing-button" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+            Delete Listing
+          </button>
         </div>
       </div>
     </div>

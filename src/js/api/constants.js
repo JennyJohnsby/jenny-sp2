@@ -14,7 +14,7 @@ export const API_PROFILE_SINGLE = `${API_BASE}/auction/profiles/<name>`; // Endp
 
 // Listings API endpoints
 export const API_LISTINGS = `${API_BASE}/auction/listings`; // Endpoint for auction listings
-export const API_DELETE_LISTINGS = `${API_BASE}/auction/listings/<id>`;
+export const API_DELETE_LISTINGS = `${API_BASE}/auction/listings`; //endpoint for delete listing
 
 // Additional endpoints if needed for profile-related data
 export const API_PROFILE_LISTINGS = `${API_BASE}/auction/profiles/<name>/listings`; // Listings by a specific profile

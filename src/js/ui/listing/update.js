@@ -8,8 +8,8 @@ export async function onUpdateListing(event) {
   const formData = new FormData(form);
 
   const listingId = formData.get("id");
-  const title = formData.get("title");
-  const description = formData.get("description");
+  const title = formData.get("title")?.trim();
+  const description = formData.get("description")?.trim();
   const tags = formData
     .get("tags")
     ?.split(",")
@@ -17,25 +17,28 @@ export async function onUpdateListing(event) {
   const mediaUrl = formData.get("mediaUrl")?.trim();
   const mediaAlt = formData.get("mediaAlt")?.trim();
 
-  const media = mediaUrl ? { url: mediaUrl, alt: mediaAlt || "" } : null;
+  const media = mediaUrl ? [{ url: mediaUrl, alt: mediaAlt || "" }] : [];
 
   try {
-    const updateListing = await updateListing(listingId, {
+    const updatedListing = await updateListing(listingId, {
       title,
       description,
       tags,
       media,
     });
-    console.log("listing succsessfully updated:", updateListing);
+    console.log("Listing updated successfully:", updatedListing);
 
-    displayBanner("listing updated succsessfully", "succsess");
+    // Show success banner
+    displayBanner("Listing updated successfully!", "success");
 
+    // Redirect back to profile after 2 seconds
     setTimeout(() => {
       window.location.href = "/profile/";
-    }, 3000);
+    }, 2000);
   } catch (error) {
-    console.error("error updating listing:", error);
+    console.error("Error updating listing:", error);
 
+    // Handle API errors
     if (error.message.includes("400")) {
       displayBanner("Invalid data provided. Please check your input.", "error");
     } else if (error.message.includes("401")) {
