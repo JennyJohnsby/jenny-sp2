@@ -1,12 +1,3 @@
-/**
- * Fetches a single listing by its ID.
- *
- * @param {string} id - The ID of the listing to retrieve.
- * @param {boolean} [includeSeller=false] - Whether to include seller information.
- * @param {boolean} [includeBids=false] - Whether to include bid count.
- * @returns {Promise<object>} The listing data.
- * @throws {Error} If the API request fails.
- */
 export async function readListing(
   id,
   includeSeller = false,
@@ -16,13 +7,15 @@ export async function readListing(
     throw new Error("Listing ID is required.");
   }
 
-  // Construct API URL with optional query parameters
+  // Construct the base URL
   let url = `https://v2.api.noroff.dev/auction/listings/${id}`;
   const params = [];
 
+  // Add query parameters if necessary
   if (includeSeller) params.push("_seller=true");
   if (includeBids) params.push("_bids=true");
 
+  // If we have query parameters, append them to the URL
   if (params.length) {
     url += `?${params.join("&")}`;
   }
@@ -42,10 +35,17 @@ export async function readListing(
       );
     }
 
+    // Fetch the response body and return only the 'data' part
     const result = await response.json();
-    return result.data; // ✅ Return only the "data" property
+
+    // If bids are included, ensure that the bids data is included
+    if (includeBids && result.data && !result.data.bids) {
+      throw new Error("Bids data is missing in the response.");
+    }
+
+    return result.data; // Return only the 'data' object, which should contain the listing details
   } catch (error) {
     console.error("Error fetching listing:", error);
-    throw error; // Re-throw for handling at a higher level
+    throw error; // Re-throw the error to be handled by the calling function
   }
 }

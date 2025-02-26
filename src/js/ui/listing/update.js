@@ -28,17 +28,10 @@ export async function onUpdateListing(event) {
     });
     console.log("Listing updated successfully:", updatedListing);
 
-    // Show success banner
     displayBanner("Listing updated successfully!", "success");
-
-    // Redirect back to profile after 2 seconds
-    setTimeout(() => {
-      window.location.href = "/profile/";
-    }, 2000);
   } catch (error) {
     console.error("Error updating listing:", error);
 
-    // Handle API errors
     if (error.message.includes("400")) {
       displayBanner("Invalid data provided. Please check your input.", "error");
     } else if (error.message.includes("401")) {

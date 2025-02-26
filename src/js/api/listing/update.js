@@ -3,7 +3,6 @@ export async function updateListing(id, { title, description, tags, media }) {
 
   console.log("Updating Listing:", { id, title, description, tags, media });
 
-  // Retrieve token correctly
   const accessToken =
     localStorage.getItem("accessToken") || localStorage.getItem("authToken");
 
@@ -15,13 +14,11 @@ export async function updateListing(id, { title, description, tags, media }) {
     throw new Error("No token found. Please log in.");
   }
 
-  // Ensure title is provided
   if (!title || title.trim() === "") {
     console.error("Title is required.");
     throw new Error("Title is required.");
   }
 
-  // Construct listingData, excluding `media` if empty
   const listingData = {
     title: title.trim(),
     description: description?.trim() || "",

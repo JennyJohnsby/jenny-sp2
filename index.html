@@ -7,7 +7,7 @@
       name="description"
       content="Bid for Forest: A sustainable auction platform where every bid helps conserve nature."
     />
-    <title>Bid For Forest</title>
+    <title>Bid For Forest | Auctions</title>
     <link
       rel="icon"
       type="image/png"
@@ -15,88 +15,108 @@
       href="/assets/favicon-32x32.png"
     />
     <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href="./src/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100;300;400;500;700;800;900&family=Montserrat+Alternates:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
   </head>
   <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
-    <!-- Header -->
     <header
       role="banner"
-      class="py-8 text-center bg-cover bg-center h-72"
+      class="relative py-8 text-center bg-cover bg-center h-72"
       style="background-image: url(./assets/alexander-62h8IRF5xDU-unsplash.jpg)"
-      alt="a forest squirrle sitting in a tree eating on a pinecone "
     >
-      <h1 class="text-4xl font-bold">Welcome to Bid For Forest</h1>
-      <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
-    </header>
-    <!-- Navigation -->
-    <nav class="top-0 bg-teal-900 py-4">
-      <div class="flex justify-around items-center">
-        <a
-          href="/auth/login/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-login"
-        >
-          <p>Sign In To Your Account</p>
-        </a>
-        <a
-          href="/auth/register/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-register"
-        >
-          <p>Create A New User Account</p>
-        </a>
-        <a
-          href="/profile/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-profile"
-        >
-          Profile</a
-        >
+      <div class="relative z-10">
+        <h1 class="text-4xl font-bold text-white">Welcome to Bid For Forest</h1>
+        <p class="mt-2 text-lg text-white">
+          Where every bid helps grow a greener future!
+        </p>
       </div>
+    </header>
+    <nav class="top-0 bg-teal-900 py-4">
+      <ul class="flex justify-center space-x-8">
+        <li>
+          <a href="/auth/login/" class="hover:text-amber-400 transition"
+            >Sign In</a
+          >
+        </li>
+        <li>
+          <a href="/auth/register/" class="hover:text-amber-400 transition"
+            >Register</a
+          >
+        </li>
+        <li>
+          <a href="/profile/" class="hover:text-amber-400 transition"
+            >Profile</a
+          >
+        </li>
+      </ul>
     </nav>
-    <!-- Main Content -->
-    <main class="max-w-3xl w-full mx-auto mt-10 flex-grow px-6">
-      <h2 class="text-3xl font-semibold text-center mb-6">
-        How It Works: Bid, Win, and Contribute to Nature
-      </h2>
-      <p class="mb-6">
-        At Bid for Forest, we believe commerce and conservation go hand in hand.
-        Our eco-conscious auction platform lets you buy and sell unique items
-        while making a positive impact on the planet.
-        <strong>Every bid grows a greener future!</strong>
-      </p>
-      <!-- Search Bar -->
-      <div class="flex justify-center mb-6">
+    <main class="w-full mx-auto mt-10 flex-grow px-6">
+      <section>
+        <h2 class="text-3xl font-semibold text-center mb-6">
+          How It Works: Bid, Win, and Contribute to Nature
+        </h2>
+        <p class="mb-6">
+          At Bid for Forest, we believe commerce and conservation go hand in
+          hand. Our eco-conscious auction platform lets you buy and sell unique
+          items while making a positive impact on the planet.
+          <strong>Every bid grows a greener future!</strong>
+        </p>
+      </section>
+
+      <section class="flex flex-col items-center">
+        <!-- Search input -->
         <input
           type="text"
           id="searchInput"
           placeholder="Search auctions..."
-          class="w-full max-w-lg p-3 rounded-md border border-gray-300 text-gray-800"
+          class="w-full max-w-lg p-3 rounded-md border border-amber-400 text-gray-800 mb-6"
         />
-      </div>
-      <!-- Filter Toggle -->
-      <div class="flex items-center justify-center mb-6">
+
+        <!-- Filter by Active Listings -->
         <label
           for="filterToggle"
-          class="text-lg font-semibold text-amber-500 mr-2"
-          >Filter by Bid For Forest Tag:</label
+          class="flex items-center text-lg font-semibold text-amber-500 cursor-pointer mb-6"
         >
-        <input
-          type="checkbox"
-          id="filterToggle"
-          class="w-6 h-6 rounded-full border-2 border-teal-500 accent-teal-500 cursor-pointer transition duration-300 ease-in-out hover:border-teal-700 focus:outline-none"
-          checked
-        />
-      </div>
-      <h3 class="text-2xl font-medium text-center mb-4">All Auctions</h3>
-      <div id="listingContainer"></div>
+          <input
+            type="checkbox"
+            id="filterToggle"
+            class="w-6 h-6 rounded-full border-2 border-teal-500 accent-teal-500 cursor-pointer transition duration-300 ease-in-out hover:border-teal-700 focus:outline-none mr-2"
+            checked
+          />
+          Filter by Active Listings
+        </label>
+
+        <!-- Tag Filter Dropdown -->
+        <label
+          for="tagSelect"
+          class="text-lg font-semibold text-amber-500 cursor-pointer mb-6"
+        >
+          Filter by Tag:
+        </label>
+        <select
+          id="tagSelect"
+          class="w-full max-w-lg p-3 rounded-md border border-amber-400 text-gray-800 mb-6"
+        >
+          <option value="">All Tags</option>
+          <option value="BFF">Bid For Forest</option>
+          <!-- Add more options as needed -->
+        </select>
+      </section>
+
+      <section>
+        <h3 class="text-2xl font-medium text-center mb-4">All Auctions</h3>
+        <div
+          id="listingContainer"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-12"
+        ></div>
+      </section>
     </main>
-    <!-- Footer -->
+
     <footer
       class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
     >

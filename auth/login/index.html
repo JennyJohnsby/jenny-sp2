@@ -7,7 +7,7 @@
       name="description"
       content="Bid for Forest: A sustainable auction platform where every bid helps conserve nature."
     />
-    <title>Bid For Forest</title>
+    <title>Bid For Forest | Log in</title>
     <link
       rel="icon"
       type="image/png"
@@ -15,6 +15,7 @@
       href="/assets/favicon-32x32.png"
     />
     <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href="../../src/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,86 +24,78 @@
     />
   </head>
   <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
-    <!-- Header -->
     <header
       role="banner"
-      class="py-8 text-center bg-cover bg-center h-72"
+      class="relative py-8 text-center bg-cover bg-center h-72"
       style="
-        background-image: url(../../assets/noah-buscher-x8ZStukS2PM-unsplash.jpg);
+        background-image: url(../../assets/lora-ninova-U86FnrpRR0k-unsplash.jpg);
       "
     >
-      <h1 class="text-4xl font-bold">Welcome to Bid For Forest</h1>
-      <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
-    </header>
-    <!-- Navigation -->
-    <nav class="top-0 bg-teal-900 py-4">
-      <div class="flex justify-around items-center">
-        <a
-          href="/auth/register/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-register"
-        >
-          <p>Create A New User Account</p>
-        </a>
-        <a
-          href="/profile/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-profile"
-        >
-          Profile</a
-        >
-        <a
-          href="/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-auctions"
-        >
-          Auctions</a
-        >
+      <div class="relative z-10">
+        <h1 class="text-4xl font-bold text-white">Welcome to Bid For Forest</h1>
+        <p class="mt-2 text-lg text-white">
+          Where every bid helps grow a greener future!
+        </p>
       </div>
+    </header>
+    <nav class="top-0 bg-teal-900 py-4">
+      <ul class="flex justify-center space-x-8">
+        <li>
+          <a href="/auth/register/" class="hover:text-amber-400 transition"
+            >Register</a
+          >
+        </li>
+        <li>
+          <a href="/" class="hover:text-amber-400 transition">Auctions</a>
+        </li>
+      </ul>
     </nav>
-    <!-- Main Content -->
-    <main class="max-w-lg w-full mx-auto mt-10 flex-grow">
+    <main class="max-w-3xl w-full mx-auto mt-10 flex-grow px-6">
       <h2 class="text-3xl font-semibold text-center mb-6">Login</h2>
-      <!-- form -->
       <form
         name="login"
         id="login-form"
         class="bg-teal-800 p-8 rounded-2xl shadow-lg"
       >
-        <fieldset class="flex flex-col gap-6">
-          <!-- Email Field -->
+        <fieldset
+          class="flex flex-col gap-6 border-2 border-teal-700 rounded-lg p-6"
+        >
           <div>
-            <label for="login-email" class="block text-base font-medium">
-              Email
-            </label>
+            <label
+              for="login-email"
+              class="block text-base font-medium text-gray-200"
+              >Email</label
+            >
             <input
               type="email"
               name="email"
               autocomplete="email"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Email address"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               id="login-email"
               placeholder="Enter your email here!"
             />
           </div>
 
-          <!-- Password Field -->
           <div>
-            <label for="login-password" class="block text-base font-medium">
-              Password
-            </label>
+            <label
+              for="login-password"
+              class="block text-base font-medium text-gray-200"
+              >Password</label
+            >
             <input
               type="password"
               name="password"
               autocomplete="current-password"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Password"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               id="login-password"
               placeholder="Enter your password here!"
             />
           </div>
 
-          <!-- Login Button -->
           <button
             type="submit"
             class="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-amber-300"
@@ -110,8 +103,7 @@
             Log In
           </button>
 
-          <!-- Register Link -->
-          <p class="text-center">
+          <p class="text-center text-gray-200 mt-4">
             Not registered yet?
             <a
               href="/auth/register/"
@@ -122,7 +114,6 @@
         </fieldset>
       </form>
     </main>
-    <!-- Footer -->
     <footer
       class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
     >
