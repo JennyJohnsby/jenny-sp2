@@ -9,8 +9,8 @@ async function fetchAndDisplayListing() {
   if (!listingContainer || !listingId) return;
 
   try {
-    // Fetch the listing with bids included
-    const listing = await readListing(listingId, true, true); // Fetch with _bids flag to get bid data
+    // Fetch the listing with bids and seller (author) information included
+    const listing = await readListing(listingId, true, true, true); // Added _seller flag to fetch seller data
     renderSingleListing(listing);
   } catch (err) {
     console.error(err);
@@ -25,6 +25,9 @@ function renderSingleListing(listing) {
 
   // ✅ Calculate the Highest Bid
   const highestBid = getHighestBid(listing.bids);
+
+  // Fetch seller details
+  const sellerName = listing.seller?.name || "Unknown Seller"; // Ensure the seller name is available
 
   listingContainer.innerHTML = `
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-20 p-6">
@@ -64,6 +67,9 @@ function renderSingleListing(listing) {
           
           <!-- Display Highest Bid -->
           <p><span class="font-semibold">Highest Bid:</span> ${highestBid}</p>
+
+          <!-- Display Seller (Author) -->
+          <p><span class="font-semibold">Seller:</span> ${sellerName}</p>
         </div>
 
         <!-- ⭐ Bidding Section ⭐ -->

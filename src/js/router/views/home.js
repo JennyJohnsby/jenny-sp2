@@ -91,8 +91,6 @@ function renderListings(listings) {
       "cursor-pointer",
       "transition",
       "hover:shadow-xl",
-      "w-full", // Takes up full width of its grid cell
-      "h-full", // Ensure the height is 100% within grid
       "transition-all",
       "duration-300",
     );
@@ -112,8 +110,8 @@ function renderListings(listings) {
       </div>
       <div class="listing__content p-6 flex flex-col justify-between h-full">
         <h3 class="listing__title text-xl font-semibold text-gray-800 hover:text-teal-600 transition-all duration-300">${listing.title || "No Title"}</h3>
-        <p class="listing__description text-gray-600 mt-2 text-sm">${listing.description || "No description available."}</p>
-        <div class="listing__tags mt-3 flex flex-wrap gap-2">
+        <p class="listing__description text-gray-600 text-sm">${listing.description || "No description available."}</p>
+        <div class="listing__tags flex flex-wrap gap-2">
           ${userVisibleTags
             .map(
               (tag) =>
@@ -121,7 +119,7 @@ function renderListings(listings) {
             )
             .join("")}
         </div>
-        <p class="listing__highest-bid mt-2 text-sm font-semibold text-gray-700">${highestBid}</p>
+        <p class="listing__highest-bid text-sm font-semibold text-gray-700">${highestBid}</p>
       </div>
     `;
 

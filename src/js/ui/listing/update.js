@@ -33,15 +33,27 @@ export async function onUpdateListing(event) {
     console.error("Error updating listing:", error);
 
     if (error.message.includes("400")) {
-      displayBanner("Invalid data provided. Please check your input.", "error");
+      displayBanner(
+        "The information provided is incomplete or invalid. Please check and try again.",
+        "error",
+      );
     } else if (error.message.includes("401")) {
-      displayBanner("Unauthorized. Please log in again.", "error");
+      displayBanner(
+        "You must be logged in to make changes to this listing.",
+        "error",
+      );
     } else if (error.message.includes("404")) {
-      displayBanner("Listing not found. It may have been deleted.", "error");
+      displayBanner(
+        "This listing does not exist or has been removed.",
+        "error",
+      );
     } else if (error.message.includes("500")) {
-      displayBanner("Server error. Please try again later.", "error");
+      displayBanner(
+        "There was an issue with the server. Please try again later.",
+        "error",
+      );
     } else {
-      displayBanner(error.message || "An unexpected error occurred.", "error");
+      displayBanner("An unexpected error occurred. Please try again.", "error");
     }
   }
 }
