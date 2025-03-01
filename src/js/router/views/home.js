@@ -1,4 +1,3 @@
-// Function to setup the search input and listen for search events
 function setupSearch(listings) {
   const searchInput = document.getElementById("searchInput");
   if (!searchInput) return;
@@ -24,7 +23,6 @@ function setupSearch(listings) {
   });
 }
 
-// Function to fetch and display listings with optional filters
 export async function fetchAndDisplayListings(
   filterByBFF = true,
   tagFilter = "",
@@ -42,14 +40,12 @@ export async function fetchAndDisplayListings(
   try {
     let url = urlBase;
 
-    // Apply _active filter if selected
     if (filterByBFF) {
-      url = `${urlBase}?_active=true`; // Filter for active listings
+      url = `${urlBase}?_active=true`;
     }
 
-    // Apply _tag filter if provided
     if (tagFilter) {
-      url += `&_tag=${tagFilter}`; // Filter by specific tag
+      url += `&_tag=${tagFilter}`;
     }
 
     const response = await fetch(url);
@@ -67,7 +63,7 @@ export async function fetchAndDisplayListings(
     }
 
     renderListings(listings);
-    setupSearch(listings); // Setup search functionality on the fetched listings
+    setupSearch(listings);
   } catch (error) {
     console.error("Error fetching listings:", error);
     listingContainer.innerHTML =
@@ -75,7 +71,6 @@ export async function fetchAndDisplayListings(
   }
 }
 
-// Function to render listings to the DOM with Tailwind styling
 function renderListings(listings) {
   const listingContainer = document.getElementById("listingContainer");
   listingContainer.innerHTML = "";
@@ -131,35 +126,30 @@ function renderListings(listings) {
   });
 }
 
-// Function to set up the filter toggle functionality
 function setupFilterToggle() {
   const filterToggle = document.getElementById("filterToggle");
 
   if (filterToggle) {
     filterToggle.addEventListener("change", (event) => {
       const isChecked = event.target.checked;
-      const selectedTag = document.getElementById("tagSelect")?.value || ""; // Get selected tag
+      const selectedTag = document.getElementById("tagSelect")?.value || "";
       fetchAndDisplayListings(isChecked, selectedTag);
     });
   }
 }
 
-// Function to set up the tag filter dropdown
 function setupTagFilter() {
   const tagSelect = document.getElementById("tagSelect");
 
   if (tagSelect) {
     tagSelect.addEventListener("change", (event) => {
       const selectedTag = event.target.value;
-      const isChecked = document.getElementById("filterToggle").checked; // Get the active filter status
+      const isChecked = document.getElementById("filterToggle").checked;
       fetchAndDisplayListings(isChecked, selectedTag);
     });
   }
 }
 
-// Call the fetch function to load listings initially with the default filter
 fetchAndDisplayListings(true);
-
-// Setup the filter toggle and tag filter
 setupFilterToggle();
 setupTagFilter();
