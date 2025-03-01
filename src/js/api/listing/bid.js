@@ -1,28 +1,26 @@
-import { API_CREATE_BID, API_KEY } from "../constants"; // Adjust the import based on your constants
+import { API_CREATE_BID, API_KEY } from "../constants";
 import { displayBanner } from "../../utilities/banners";
 
-// Function to send the bid request to the API
 const sendBidToAPI = async (listingId, amount, accessToken) => {
-  const url = `${API_CREATE_BID}/${listingId}/bids`; // Complete the endpoint with listingId and /bids
+  const url = `${API_CREATE_BID}/${listingId}/bids`;
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
-        "X-Noroff-API-Key": API_KEY, // Adjust the API Key if needed
+        "X-Noroff-API-Key": API_KEY,
       },
       body: JSON.stringify({ amount }),
     });
 
-    return response; // Return the API response
+    return response;
   } catch (error) {
     console.error("Error sending bid to API:", error);
     throw new Error("Error sending bid to API. Please try again.");
   }
 };
 
-// Handle API response for placing a bid
 const handleBidResponse = (response) => {
   if (response.status === 404) {
     displayBanner(
@@ -43,7 +41,6 @@ const handleBidResponse = (response) => {
   }
 };
 
-// Function to handle placing a bid
 export async function createBid(listingId, amount) {
   if (!listingId || !amount) {
     displayBanner("Invalid listing ID or bid amount.", "error");
@@ -66,12 +63,8 @@ export async function createBid(listingId, amount) {
     const response = await sendBidToAPI(listingId, amount, accessToken);
 
     if (response.ok) {
-      // Check if the response was successful
       if (!handleBidResponse(response)) return;
-
-      // You could update UI or do other things after successfully placing the bid
     } else {
-      // Handle response error if not ok
       const errorDetails = await response.json();
       displayBanner(
         `API Error: ${errorDetails.message || response.statusText}`,
