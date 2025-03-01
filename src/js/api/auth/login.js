@@ -4,15 +4,6 @@ import { authGuard } from "../../utilities/authGuard.js";
 document.addEventListener("DOMContentLoaded", () => {
   authGuard(true);
 });
-
-/**
- * Logs in a user and stores authentication details securely.
- * @param {Object} credentials - The user's login details.
- * @param {string} credentials.email - The user's email.
- * @param {string} credentials.password - The user's password.
- * @returns {Promise<Object>} - Returns the user's login response.
- * @throws {Error} - Throws an error if login fails.
- */
 export async function login({ email, password }) {
   try {
     const response = await fetch(API_AUTH_LOGIN, {

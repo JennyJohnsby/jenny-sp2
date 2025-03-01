@@ -8,8 +8,8 @@ export async function onUpdateListing(event) {
   const formData = new FormData(form);
 
   const listingId = formData.get("id");
-  const title = formData.get("title");
-  const description = formData.get("description");
+  const title = formData.get("title")?.trim();
+  const description = formData.get("description")?.trim();
   const tags = formData
     .get("tags")
     ?.split(",")
@@ -17,35 +17,43 @@ export async function onUpdateListing(event) {
   const mediaUrl = formData.get("mediaUrl")?.trim();
   const mediaAlt = formData.get("mediaAlt")?.trim();
 
-  const media = mediaUrl ? { url: mediaUrl, alt: mediaAlt || "" } : null;
+  const media = mediaUrl ? [{ url: mediaUrl, alt: mediaAlt || "" }] : [];
 
   try {
-    const updateListing = await updateListing(listingId, {
+    const updatedListing = await updateListing(listingId, {
       title,
       description,
       tags,
       media,
     });
-    console.log("listing succsessfully updated:", updateListing);
+    console.log("Listing updated successfully:", updatedListing);
 
-    displayBanner("listing updated succsessfully", "succsess");
-
-    setTimeout(() => {
-      window.location.href = "/profile/";
-    }, 3000);
+    displayBanner("Listing updated successfully!", "success");
   } catch (error) {
-    console.error("error updating listing:", error);
+    console.error("Error updating listing:", error);
 
     if (error.message.includes("400")) {
-      displayBanner("Invalid data provided. Please check your input.", "error");
+      displayBanner(
+        "The information provided is incomplete or invalid. Please check and try again.",
+        "error",
+      );
     } else if (error.message.includes("401")) {
-      displayBanner("Unauthorized. Please log in again.", "error");
+      displayBanner(
+        "You must be logged in to make changes to this listing.",
+        "error",
+      );
     } else if (error.message.includes("404")) {
-      displayBanner("Listing not found. It may have been deleted.", "error");
+      displayBanner(
+        "This listing does not exist or has been removed.",
+        "error",
+      );
     } else if (error.message.includes("500")) {
-      displayBanner("Server error. Please try again later.", "error");
+      displayBanner(
+        "There was an issue with the server. Please try again later.",
+        "error",
+      );
     } else {
-      displayBanner(error.message || "An unexpected error occurred.", "error");
+      displayBanner("An unexpected error occurred. Please try again.", "error");
     }
   }
 }

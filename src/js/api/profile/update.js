@@ -1,4 +1,5 @@
 import { API_KEY } from "../constants";
+
 export async function updateProfile({ bio, avatar, banner, avatarFile }) {
   // Get user info from localStorage
   const userInLocalStorage = JSON.parse(localStorage.getItem("currentUser"));
@@ -22,15 +23,24 @@ export async function updateProfile({ bio, avatar, banner, avatarFile }) {
   // Create FormData if avatarFile is provided
   let formData = new FormData();
   if (avatarFile) {
+    // Check file type or size here if needed
+    if (!["image/jpeg", "image/png"].includes(avatarFile.type)) {
+      throw new Error("Invalid file type. Please upload a JPEG or PNG image.");
+    }
     formData.append("avatar", avatarFile); // Append the avatar file to the form data
   }
 
-  // If no avatar file, use the URL provided in the avatar object
-  const profileData = {
-    bio: bio || "", // If bio is not provided, send an empty string
-    ...(avatar?.url ? { avatar } : {}), // Include avatar if URL is provided
-    ...(banner?.url ? { banner } : {}), // Include banner if URL is provided
-  };
+  if (bio) {
+    formData.append("bio", bio); // Append bio if provided
+  }
+
+  if (avatar?.url) {
+    formData.append("avatarUrl", avatar.url); // Append avatar URL if provided
+  }
+
+  if (banner?.url) {
+    formData.append("bannerUrl", banner.url); // Append banner URL if provided
+  }
 
   try {
     let response;
@@ -53,7 +63,11 @@ export async function updateProfile({ bio, avatar, banner, avatarFile }) {
           Authorization: `Bearer ${token}`,
           "X-Noroff-API-Key": API_KEY, // Use the imported API key
         },
-        body: JSON.stringify(profileData), // Send profile data as a JSON string
+        body: JSON.stringify({
+          bio,
+          ...(avatar?.url ? { avatar } : {}),
+          ...(banner?.url ? { banner } : {}),
+        }), // Send profile data as a JSON string
       });
     }
 
@@ -64,9 +78,14 @@ export async function updateProfile({ bio, avatar, banner, avatarFile }) {
     }
 
     // Return the updated profile data
-    return await response.json();
+    const updatedProfile = await response.json();
+    if (!updatedProfile) {
+      throw new Error("Profile update failed: No response data.");
+    }
+
+    return updatedProfile;
   } catch (error) {
-    console.error("Failed to update profile:", error);
+    console.error("Failed to update profile:", error.message || error);
     throw error;
   }
 }

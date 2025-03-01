@@ -1,53 +1,57 @@
-// Function to set up the search functionality
+// Function to setup the search input and listen for search events
 function setupSearch(listings) {
   const searchInput = document.getElementById("searchInput");
   if (!searchInput) return;
 
-  // Add event listener to the search input
   searchInput.addEventListener("input", async (event) => {
     const query = event.target.value.toLowerCase();
 
-    // Only fetch data if the query is not empty
     if (query === "") {
-      // If query is empty, just render all listings
       renderListings(listings);
       return;
     }
 
     try {
-      // Fetch filtered listings from the API based on the search query
       const response = await fetch(
         `https://v2.api.noroff.dev/auction/listings/search?q=${query}`,
       );
       const json = await response.json();
       const searchedListings = json.data;
-      renderListings(searchedListings); // Render the search results
+      renderListings(searchedListings);
     } catch (error) {
       console.error("Error searching listings:", error);
     }
   });
 }
 
-// Function to fetch and display listings with optional tag filtering
-export async function fetchAndDisplayListings(filterByBFF = true) {
-  const urlBase = "https://v2.api.noroff.dev/auction/listings"; // API endpoint base
-  const listingContainer = document.getElementById("listingContainer"); // Listings container
+// Function to fetch and display listings with optional filters
+export async function fetchAndDisplayListings(
+  filterByBFF = true,
+  tagFilter = "",
+) {
+  const urlBase = "https://v2.api.noroff.dev/auction/listings";
+  const listingContainer = document.getElementById("listingContainer");
 
   if (!listingContainer) {
     console.error("Listing container not found in the DOM");
     return;
   }
 
-  listingContainer.innerHTML = "<p>Loading listings...</p>"; // Show loading message
+  listingContainer.innerHTML = "<p>Loading listings...</p>";
 
   try {
-    // Set up URL with default filter by tag "BFF" if filterByBFF is true
     let url = urlBase;
+
+    // Apply _active filter if selected
     if (filterByBFF) {
-      url = `${urlBase}?_tag=BFF&_active=true`; // Filter for BFF tag and active listings
+      url = `${urlBase}?_active=true`; // Filter for active listings
     }
 
-    // Fetch the listings from the API
+    // Apply _tag filter if provided
+    if (tagFilter) {
+      url += `&_tag=${tagFilter}`; // Filter by specific tag
+    }
+
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -62,11 +66,8 @@ export async function fetchAndDisplayListings(filterByBFF = true) {
       return;
     }
 
-    // Render the listings
     renderListings(listings);
-
-    // Set up search functionality
-    setupSearch(listings); // ✅ Enable search functionality
+    setupSearch(listings); // Setup search functionality on the fetched listings
   } catch (error) {
     console.error("Error fetching listings:", error);
     listingContainer.innerHTML =
@@ -74,10 +75,10 @@ export async function fetchAndDisplayListings(filterByBFF = true) {
   }
 }
 
-// Function to render listings
+// Function to render listings to the DOM with Tailwind styling
 function renderListings(listings) {
   const listingContainer = document.getElementById("listingContainer");
-  listingContainer.innerHTML = ""; // Clear previous listings
+  listingContainer.innerHTML = "";
 
   listings.forEach((listing) => {
     const listingElement = document.createElement("div");
@@ -85,65 +86,80 @@ function renderListings(listings) {
       "listing",
       "bg-white",
       "rounded-lg",
-      "shadow-md",
+      "shadow-lg",
       "overflow-hidden",
-      "mb-6",
       "cursor-pointer",
       "transition",
-      "hover:shadow-lg",
+      "hover:shadow-xl",
+      "transition-all",
+      "duration-300",
     );
 
-    // Handle missing or empty tags
     const userVisibleTags =
       listing.tags?.filter((tag) => tag !== "BidForForest") || [];
     const highestBid =
       listing._count?.bids > 0 ? "Bids available" : "No bids yet";
 
-    // Create the HTML structure for each listing
     listingElement.innerHTML = `
-      <div class="listing__image-container">
+      <div class="listing__image-container overflow-hidden relative group">
         ${
           listing.media?.[0]?.url
-            ? `<img src="${listing.media[0].url}" alt="${listing.media[0].alt || "Listing image"}" class="w-full h-48 object-cover" />`
-            : `<img src="/images/avatar-placeholder.png" alt="Placeholder image" class="w-full h-48 object-cover" />`
+            ? `<img src="${listing.media[0].url}" alt="${listing.media[0].alt || "Listing image"}" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" />`
+            : `<img src="/images/avatar-placeholder.png" alt="Placeholder image" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" />`
         }
       </div>
-      <div class="listing__content p-4">
-        <h3 class="listing__title text-xl font-semibold text-gray-800">${listing.title || "No Title"}</h3>
-        <p class="listing__description text-gray-600 mt-2">${listing.description || "No description available."}</p>
-        <div class="listing__tags mt-3">
-          ${userVisibleTags.map((tag) => `<span class="listing__tag inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded mr-2">${tag}</span>`).join("")}
+      <div class="listing__content p-6 flex flex-col justify-between h-full">
+        <h3 class="listing__title text-xl font-semibold text-gray-800 hover:text-teal-600 transition-all duration-300">${listing.title || "No Title"}</h3>
+        <p class="listing__description text-gray-600 text-sm">${listing.description || "No description available."}</p>
+        <div class="listing__tags flex flex-wrap gap-2">
+          ${userVisibleTags
+            .map(
+              (tag) =>
+                `<span class="listing__tag inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">${tag}</span>`,
+            )
+            .join("")}
         </div>
-        <p class="listing__highest-bid mt-2 text-sm font-semibold text-gray-700">${highestBid}</p>
+        <p class="listing__highest-bid text-sm font-semibold text-gray-700">${highestBid}</p>
       </div>
     `;
 
-    // Add event listener to navigate to the listing details when clicked
     listingElement.addEventListener("click", () => {
       window.location.href = `/listings/?id=${listing.id}`;
     });
 
-    // Append the listing element to the container
     listingContainer.appendChild(listingElement);
   });
 }
 
-// Function to handle the toggle for filtering by BFF tag
+// Function to set up the filter toggle functionality
 function setupFilterToggle() {
   const filterToggle = document.getElementById("filterToggle");
 
   if (filterToggle) {
-    // Add event listener for the filter toggle (checkbox)
     filterToggle.addEventListener("change", (event) => {
       const isChecked = event.target.checked;
-      // Re-fetch and display listings based on whether the checkbox is checked
-      fetchAndDisplayListings(isChecked); // If checked, filter by BFF; if unchecked, show all
+      const selectedTag = document.getElementById("tagSelect")?.value || ""; // Get selected tag
+      fetchAndDisplayListings(isChecked, selectedTag);
     });
   }
 }
 
-// Initial call to fetch listings with default filter (BFF tag)
-fetchAndDisplayListings(true); // Pass 'true' to filter by the BFF tag by default
+// Function to set up the tag filter dropdown
+function setupTagFilter() {
+  const tagSelect = document.getElementById("tagSelect");
 
-// Set up filter toggle on page load
+  if (tagSelect) {
+    tagSelect.addEventListener("change", (event) => {
+      const selectedTag = event.target.value;
+      const isChecked = document.getElementById("filterToggle").checked; // Get the active filter status
+      fetchAndDisplayListings(isChecked, selectedTag);
+    });
+  }
+}
+
+// Call the fetch function to load listings initially with the default filter
+fetchAndDisplayListings(true);
+
+// Setup the filter toggle and tag filter
 setupFilterToggle();
+setupTagFilter();

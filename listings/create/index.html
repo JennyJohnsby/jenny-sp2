@@ -15,6 +15,7 @@
       href="/assets/favicon-32x32.png"
     />
     <script type="module" src="/src/app.js" defer></script>
+    <link rel="stylesheet" href="../../src/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,35 +24,31 @@
     />
   </head>
   <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
-    <!-- Header -->
     <header
       role="banner"
-      class="py-8 text-center bg-cover bg-center h-72"
+      class="relative py-8 text-center bg-cover bg-center h-72"
       style="
-        background-image: url(../../assets/imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg);
+        background-image: url(../../assets/noah-buscher-x8ZStukS2PM-unsplash.jpg);
       "
     >
-      <h1 class="text-4xl font-bold">Welcome to Bid For Forest</h1>
-      <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
-    </header>
-    <!-- Navigation -->
-    <nav class="top-0 bg-teal-900 py-4">
-      <div class="flex justify-around items-center">
-        <a
-          href="/profile/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-profile"
-        >
-          Profile</a
-        >
-        <a
-          href="../../"
-          class="flex flex-col items-center space-y-1"
-          id="nav-auctions"
-        >
-          Auctions</a
-        >
+      <div class="relative z-10">
+        <h1 class="text-4xl font-bold text-white">Welcome to Bid For Forest</h1>
+        <p class="mt-2 text-lg text-gray-200">
+          Where every bid helps grow a greener future!
+        </p>
       </div>
+    </header>
+    <nav class="top-0 bg-teal-900 py-4">
+      <ul class="flex justify-center space-x-8">
+        <li>
+          <a href="/profile/" class="hover:text-amber-400 transition"
+            >Profile</a
+          >
+        </li>
+        <li>
+          <a href="/" class="hover:text-amber-400 transition">Auctions</a>
+        </li>
+      </ul>
     </nav>
     <main class="max-w-3xl w-full mx-auto mt-10 flex-grow px-6">
       <h2 class="text-3xl font-semibold text-center mb-6">
@@ -63,104 +60,106 @@
         while making a positive impact on the planet.
         <strong>Every bid grows a greener future!</strong>
       </p>
-      <!-- Create Listing Form -->
       <form id="createListing" class="bg-teal-800 p-8 rounded-2xl shadow-lg">
         <h2 class="text-2xl font-semibold text-center mb-4">
           Create a New Listing
         </h2>
 
-        <!-- Title -->
         <div class="mb-4">
-          <label for="title" class="block font-medium mb-1">Title</label>
+          <label for="title" class="block font-medium text-gray-200 mb-1"
+            >Title</label
+          >
           <input
             type="text"
             name="title"
             id="title"
+            placeholder="Tilte for you listing"
             required
-            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+            class="w-full p-3 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
           />
         </div>
 
-        <!-- Description -->
         <div class="mb-4">
-          <label for="description" class="block font-medium mb-1"
+          <label for="description" class="block font-medium text-gray-200 mb-1"
             >Description</label
           >
           <textarea
             name="description"
             id="description"
+            placeholder="Max 280 letters"
             rows="4"
-            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+            class="w-full p-3 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
           ></textarea>
         </div>
 
-        <!-- Tags -->
         <div class="mb-4">
-          <label for="tags" class="block font-medium mb-1"
+          <label for="tags" class="block font-medium text-gray-200 mb-1"
             >Tags (comma-separated)</label
           >
           <input
+            placeholder="Remember tags so your listing is easier to find"
             type="text"
             name="tags"
             id="tags"
-            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+            class="w-full p-3 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
           />
         </div>
 
-        <!-- Media URL -->
         <div class="mb-4">
-          <label for="mediaUrl" class="block font-medium mb-1">Media URL</label>
+          <label for="mediaUrl" class="block font-medium text-gray-200 mb-1"
+            >Media URL</label
+          >
           <input
+            placeholder="Image of your listing"
             type="url"
             name="mediaUrl"
             id="mediaUrl"
-            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+            class="w-full p-3 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
           />
         </div>
 
-        <!-- Media Alt Text -->
         <div class="mb-4">
-          <label for="mediaAlt" class="block font-medium mb-1"
+          <label for="mediaAlt" class="block font-medium text-gray-200 mb-1"
             >Media Alt Text</label
           >
           <input
             type="text"
+            placeholder="A short text to describe your image"
             name="mediaAlt"
             id="mediaAlt"
-            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+            class="w-full p-3 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
           />
         </div>
 
-        <!-- End Date (endsAt) -->
         <div class="mb-4">
-          <label for="endsAt" class="block font-medium mb-1">End Date</label>
+          <label for="endsAt" class="block font-medium text-gray-200 mb-1"
+            >End Date</label
+          >
           <input
             type="datetime-local"
             name="endsAt"
             id="endsAt"
             required
-            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+            class="w-full p-3 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
           />
         </div>
 
-        <!-- Buttons -->
         <div class="flex justify-between items-center mt-6">
           <a
             href="/profile/"
-            class="px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition"
+            class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition"
           >
             Cancel
           </a>
           <button
             type="submit"
-            class="px-4 py-2 bg-amber-600 text-teal-900 font-bold rounded-lg hover:bg-amber-500 transition"
+            class="px-4 py-2 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition"
           >
             Create Listing
           </button>
         </div>
       </form>
     </main>
-    <!-- Footer -->
     <footer
       class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
     >

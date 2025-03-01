@@ -28,24 +28,50 @@ export async function onUpdateProfile(event) {
     // Display success banner
     displayBanner("Profile updated successfully!", "success");
 
-    // Navigate back to the profile page after 2 seconds
-    setTimeout(() => {
-      window.location.href = "/profile/"; // Adjust the URL if needed
-    }, 2000);
+    // Dynamically update the profile information in the UI
+
+    // Update avatar
+    const avatarElement = document.querySelector(".profile-avatar");
+    if (avatarElement) {
+      avatarElement.src =
+        updatedProfile.avatar?.url || "public/images/avatar-placeholder.png";
+      avatarElement.alt = updatedProfile.avatar?.alt || "User Avatar";
+    }
+
+    // Update banner
+    const bannerElement = document.querySelector(".profile-banner-image");
+    if (bannerElement) {
+      bannerElement.src =
+        updatedProfile.banner?.url || "public/images/banner-placeholder.jpg";
+      bannerElement.alt = updatedProfile.banner?.alt || "User Banner";
+    }
+
+    // Update bio
+    const bioElement = document.querySelector(".profile-bio");
+    if (bioElement) {
+      bioElement.textContent = updatedProfile.bio || "No bio available";
+    }
+
+    // Update total credits (assuming it's part of the profile)
+    const creditsElement = document.querySelector(".profile-credits");
+    if (creditsElement) {
+      creditsElement.textContent = `Total Credit: ${updatedProfile.credits || 0}`;
+    }
+
+    // Update profile type
+    const profileTypeElement = document.querySelector(".profile-type");
+    if (profileTypeElement) {
+      profileTypeElement.textContent =
+        updatedProfile.venueManager !== undefined
+          ? updatedProfile.venueManager
+            ? "Venue Manager"
+            : "Regular User"
+          : "User";
+    }
   } catch (error) {
     console.error("Error updating profile:", error);
 
     // Handle specific errors based on status codes or messages
-    if (error.message.includes("400")) {
-      displayBanner("Invalid data provided. Please check your input.", "error");
-    } else if (error.message.includes("401")) {
-      displayBanner("Unauthorized. Please log in again.", "error");
-    } else if (error.message.includes("404")) {
-      displayBanner("Profile not found. It may have been deleted.", "error");
-    } else if (error.message.includes("500")) {
-      displayBanner("Server error. Please try again later.", "error");
-    } else {
-      displayBanner(error.message || "An unexpected error occurred.", "error");
-    }
+    displayBanner(error.message || "An unexpected error occurred.", "error");
   }
 }

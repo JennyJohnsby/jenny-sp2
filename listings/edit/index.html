@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Bid for Forest: A sustainable auction platform where every bid contributes to environmental conservation."
+      content="Bid for Forest: A sustainable auction platform where every bid helps conserve nature."
     />
-    <title>Bid For Forest</title>
+    <title>Bid For Forest | Edit listing</title>
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
       href="/assets/favicon-32x32.png"
     />
-    <script type="module" src="/src/app.js" defer></script>
+    <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href="../../src/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,5 +23,104 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-teal-950 text-amber-100 text-2xl"></body>
+  <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
+    <header
+      role="banner"
+      class="relative py-8 text-center bg-cover bg-center h-72"
+      style="
+        background-image: url(../../assets/noah-buscher-x8ZStukS2PM-unsplash.jpg);
+      "
+    >
+      <div class="relative z-10">
+        <h1 class="text-4xl font-bold text-white">Welcome to Bid For Forest</h1>
+        <p class="mt-2 text-lg text-gray-200">
+          Where every bid helps grow a greener future!
+        </p>
+      </div>
+    </header>
+    <nav class="top-0 bg-teal-900 py-4">
+      <ul class="flex justify-center space-x-8">
+        <li>
+          <a href="/profile/" class="hover:text-amber-400 transition"
+            >Profile</a
+          >
+        </li>
+        <li>
+          <a href="/" class="hover:text-amber-400 transition">Auctions</a>
+        </li>
+      </ul>
+    </nav>
+    <main class="max-w-3xl w-full mx-auto mt-10 flex-grow px-6">
+      <h2 class="text-3xl font-semibold text-center mb-6">
+        Why Keeping Your Listings Updated Matters
+      </h2>
+      <p class="mb-6">
+        Regularly updating your listings is crucial for staying competitive and
+        ensuring potential buyers have the most accurate information. An updated
+        listing shows you're engaged and committed to providing the best
+        experience. It builds trust with customers, boosts visibility in search
+        results, and highlights any new features or changes that might catch a
+        buyer’s eye. Don’t let outdated information cost you opportunities—keep
+        your listings fresh and relevant to attract more interest and close more
+        deals!
+      </p>
+      <form name="editListing" class="bg-teal-800 p-8 rounded-2xl shadow-lg">
+        <h2 class="text-2xl font-semibold text-center mb-4">Edit Listing</h2>
+
+        <input type="hidden" name="id" />
+        <div class="mb-4">
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
+        <div class="mb-4">
+          <textarea
+            name="description"
+            placeholder="Description"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          ></textarea>
+        </div>
+        <div class="mb-4">
+          <input
+            type="text"
+            name="tags"
+            placeholder="Tags (comma-separated)"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
+        <div class="mb-4">
+          <input
+            type="text"
+            name="mediaUrl"
+            placeholder="Media URL"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
+        <div class="mb-4">
+          <input
+            type="text"
+            name="mediaAlt"
+            placeholder="Alt text for image"
+            class="w-full p-2 rounded-lg bg-teal-800 border border-teal-700 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+          />
+        </div>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition"
+        >
+          Update Listing
+        </button>
+      </form>
+    </main>
+    <footer
+      class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
+    >
+      <p>&copy; 2025 Bid For Forest. All rights reserved.</p>
+      <span class="hidden md:block">|</span>
+      <p>Developed by Jenny Johnsby</p>
+    </footer>
+  </body>
 </html>

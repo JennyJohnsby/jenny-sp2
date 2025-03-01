@@ -1,5 +1,6 @@
 import { readListing } from "../../api/listing/read.js";
 import { deleteListing } from "../../api/listing/delete.js";
+import { createBid } from "../../api/listing/bid.js"; // ✅ Import the bid function
 
 async function fetchAndDisplayListing() {
   const listingId = new URLSearchParams(window.location.search).get("id");
@@ -8,7 +9,8 @@ async function fetchAndDisplayListing() {
   if (!listingContainer || !listingId) return;
 
   try {
-    const listing = await readListing(listingId);
+    // Fetch the listing with bids and seller (author) information included
+    const listing = await readListing(listingId, true, true, true); // Added _seller flag to fetch seller data
     renderSingleListing(listing);
   } catch (err) {
     console.error(err);
@@ -20,6 +22,12 @@ function renderSingleListing(listing) {
   const listingContainer = document.getElementById("listingDetailContainer");
 
   if (!listingContainer) return;
+
+  // ✅ Calculate the Highest Bid
+  const highestBid = getHighestBid(listing.bids);
+
+  // Fetch seller details
+  const sellerName = listing.seller?.name || "Unknown Seller"; // Ensure the seller name is available
 
   listingContainer.innerHTML = `
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-20 p-6">
@@ -56,23 +64,102 @@ function renderSingleListing(listing) {
           <p><span class="font-semibold">Created on:</span> ${new Date(listing.created).toLocaleString()}</p>
           <p><span class="font-semibold">Ends at:</span> ${new Date(listing.endsAt).toLocaleString()}</p>
           <p><span class="font-semibold">Number of bids:</span> ${listing._count?.bids || 0}</p>
+          
+          <!-- Display Highest Bid -->
+          <p><span class="font-semibold">Highest Bid:</span> ${highestBid}</p>
+
+          <!-- Display Seller (Author) -->
+          <p><span class="font-semibold">Seller:</span> ${sellerName}</p>
         </div>
 
-        <!-- Delete Button -->
-        <div class="mt-6">
-          <button id="delete-listing-button" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete Listing</button>
+        <!-- ⭐ Bidding Section ⭐ -->
+        <div id="bidSection" class="mt-6 p-4 bg-teal-800 rounded-lg shadow-md">
+          <h3 class="text-2xl font-semibold text-center mb-4">Place Your Bid</h3>
+          <form id="bidForm" class="flex flex-col items-center gap-4">
+            <input 
+              type="number" 
+              id="bidAmount" 
+              class="w-full p-2 rounded-md text-black"
+              placeholder="Enter bid amount"
+              min="1"
+              required 
+            />
+            <button 
+              type="submit" 
+              class="bg-amber-500 text-white px-4 py-2 rounded-md hover:bg-amber-600 transition"
+            >
+              Place Bid
+            </button>
+          </form>
+          <p id="bidMessage" class="text-center mt-2 text-sm"></p>
+        </div>
+
+        <!-- Buttons (Edit & Delete) -->
+        <div class="mt-6 flex gap-4">
+          <a href="edit/?id=${listing.id}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+            Edit Listing
+          </a>
+          <button id="delete-listing-button" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+            Delete Listing
+          </button>
         </div>
       </div>
     </div>
   `;
 
-  // Add event listener for the delete button
+  // ✅ Handle Bidding Form Submission
+  const bidForm = document.getElementById("bidForm");
+  const bidMessage = document.getElementById("bidMessage");
+
+  if (bidForm) {
+    bidForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const bidAmount = document.getElementById("bidAmount").value;
+
+      if (!bidAmount || bidAmount <= 0) {
+        bidMessage.textContent = "Please enter a valid bid amount.";
+        bidMessage.classList.add("text-red-500");
+        return;
+      }
+
+      try {
+        await createBid(listing.id, parseFloat(bidAmount));
+        bidMessage.textContent = "Bid placed successfully!";
+        bidMessage.classList.add("text-green-500");
+
+        // ✅ Optional: Refresh the listing to update bid count
+        fetchAndDisplayListing();
+      } catch (error) {
+        console.error("Error placing bid:", error);
+        bidMessage.textContent = "Failed to place bid. Please try again.";
+        bidMessage.classList.add("text-red-500");
+      }
+    });
+  }
+
+  // ✅ Handle Delete Button
   const deleteButton = document.getElementById("delete-listing-button");
   if (deleteButton) {
     deleteButton.addEventListener("click", () => {
-      deleteListing(listing.id); // Call delete function with listing ID
+      deleteListing(listing.id);
     });
   }
+}
+
+// ✅ Function to Get Highest Bid
+function getHighestBid(bids) {
+  if (!bids || bids.length === 0) {
+    return "No bids yet";
+  }
+
+  // Find the highest bid from the bids array
+  const highestBid = bids.reduce(
+    (max, bid) => (bid.amount > max.amount ? bid : max),
+    bids[0],
+  );
+
+  // Return the highest bid amount with currency formatting
+  return `$${highestBid.amount.toFixed(2)}`;
 }
 
 fetchAndDisplayListing();

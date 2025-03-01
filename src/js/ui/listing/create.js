@@ -1,11 +1,6 @@
 import { createListing } from "../../api/listing/create.js";
 import { displayBanner } from "../../utilities/banners.js";
 
-/**
- * Handles the form submission for creating a listing.
- *
- * @param {Event} event - The form submission event.
- */
 export async function onCreateListing(event) {
   event.preventDefault();
 
@@ -37,7 +32,7 @@ export async function onCreateListing(event) {
     description: description || "",
     tags,
     media: mediaUrl ? [{ url: mediaUrl, alt: mediaAlt }] : null,
-    endsAt, // ✅ Include endsAt in the object
+    endsAt,
   };
 
   try {

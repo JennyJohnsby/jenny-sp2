@@ -7,7 +7,7 @@
       name="description"
       content="Bid for Forest: A sustainable auction platform where every bid helps conserve nature."
     />
-    <title>Bid For Forest</title>
+    <title>Bid For Forest | Profile</title>
     <link
       rel="icon"
       type="image/png"
@@ -15,6 +15,7 @@
       href="/assets/favicon-32x32.png"
     />
     <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href="../../src/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,52 +24,30 @@
     />
   </head>
   <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
-    <!-- Header -->
     <header
       role="banner"
-      class="py-8 text-center bg-cover bg-center h-72"
+      class="relative py-8 text-center bg-cover bg-center h-72"
       style="
-        background-image: url(../assets/imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg);
+        background-image: url(../../assets/noah-buscher-x8ZStukS2PM-unsplash.jpg);
       "
     >
-      <h1 class="text-4xl font-bold">Profile</h1>
-      <p class="mt-2 text-lg">View and manage your profile details.</p>
-    </header>
-
-    <!-- Navigation -->
-    <nav class="top-0 bg-teal-900 py-4">
-      <div class="flex justify-around items-center">
-        <a
-          href="../../"
-          class="flex flex-col items-center space-y-1"
-          id="nav-auctions"
-        >
-          Auctions
-        </a>
-        <!-- Additional navigation links can be added here -->
-        <a
-          href="../../profile"
-          class="flex flex-col items-center space-y-1"
-          id="nav-profile"
-        >
-          Profile
-        </a>
-        <a
-          href="../../settings"
-          class="flex flex-col items-center space-y-1"
-          id="nav-settings"
-        >
-          Settings
-        </a>
+      <div class="relative z-10">
+        <h1 class="text-4xl font-bold text-white">Welcome to Bid For Forest</h1>
+        <p class="mt-2 text-lg text-white">
+          Where every bid helps grow a greener future!
+        </p>
       </div>
+    </header>
+    <nav class="top-0 bg-teal-900 py-4">
+      <ul class="flex justify-center space-x-8">
+        <li>
+          <a href="/" class="hover:text-amber-400 transition">Auctions</a>
+        </li>
+      </ul>
     </nav>
-
-    <!-- Main content -->
-    <main class="flex-grow">
+    <main class="w-full mx-auto mt-10 flex-grow px-6">
       <div id="profile" class="px-4 py-8"></div>
     </main>
-
-    <!-- Footer -->
     <footer
       class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
     >
@@ -76,13 +55,5 @@
       <span class="hidden md:block">|</span>
       <p>Developed by Jenny Johnsby</p>
     </footer>
-
-    <!-- Optional: Add a modal for error or success messages if needed -->
-    <div
-      id="banner-container"
-      class="fixed top-0 left-0 right-0 bg-teal-800 text-white p-4 hidden"
-    >
-      <p id="banner-message"></p>
-    </div>
   </body>
 </html>

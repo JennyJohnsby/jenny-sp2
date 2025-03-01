@@ -7,7 +7,7 @@
       name="description"
       content="Bid for Forest: A sustainable auction platform where every bid helps conserve nature."
     />
-    <title>Bid For Forest</title>
+    <title>Bid For Forest | Register</title>
     <link
       rel="icon"
       type="image/png"
@@ -15,6 +15,7 @@
       href="/assets/favicon-32x32.png"
     />
     <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href="../../src/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,57 +24,46 @@
     />
   </head>
   <body class="bg-teal-950 text-amber-100 text-lg flex flex-col min-h-screen">
-    <!-- Header -->
     <header
       role="banner"
-      class="py-8 text-center bg-cover bg-center h-72"
+      class="relative py-8 text-center bg-cover bg-center h-72"
       style="
         background-image: url(../../assets/lora-ninova-U86FnrpRR0k-unsplash.jpg);
       "
     >
-      <h1 class="text-4xl font-bold">Welcome to Bid For Forest</h1>
-      <p class="mt-2 text-lg">Where every bid helps grow a greener future!</p>
-    </header>
-    <!-- Navigation -->
-    <nav class="top-0 bg-teal-900 py-4">
-      <div class="flex justify-around items-center">
-        <a
-          href="/auth/login/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-login"
-        >
-          <p>Sign In To Your Account</p>
-        </a>
-
-        <a
-          href="/profile/"
-          class="flex flex-col items-center space-y-1"
-          id="nav-profile"
-        >
-          Profile</a
-        >
-        <a
-          href="/index.html"
-          class="flex flex-col items-center space-y-1"
-          id="nav-auctions"
-        >
-          Auctions</a
-        >
+      <div class="relative z-10">
+        <h1 class="text-4xl font-bold text-white">Welcome to Bid For Forest</h1>
+        <p class="mt-2 text-lg text-white">
+          Where every bid helps grow a greener future!
+        </p>
       </div>
+    </header>
+    <nav class="top-0 bg-teal-900 py-4">
+      <ul class="flex justify-center space-x-8">
+        <li>
+          <a href="/auth/login/" class="hover:text-amber-400 transition"
+            >Sign in</a
+          >
+        </li>
+        <li>
+          <a href="/" class="hover:text-amber-400 transition">Auctions</a>
+        </li>
+      </ul>
     </nav>
-    <!-- Main Content -->
-    <main class="max-w-lg w-full mx-auto mt-10 flex-grow">
+    <main class="max-w-3xl w-full mx-auto mt-10 flex-grow px-6">
       <h2 class="text-3xl font-semibold text-center mb-6">Create an Account</h2>
-      <!-- Form -->
       <form
         name="register"
         id="registerForm"
         class="bg-teal-800 p-8 rounded-2xl shadow-lg"
       >
-        <fieldset class="flex flex-col gap-6">
-          <!-- Name Field -->
+        <fieldset
+          class="flex flex-col gap-6 border-2 border-teal-700 rounded-lg p-6"
+        >
           <div>
-            <label for="register-name" class="block text-base font-medium"
+            <label
+              for="register-name"
+              class="block text-base font-medium text-gray-200"
               >User Name</label
             >
             <input
@@ -81,41 +71,50 @@
               name="name"
               id="register-name"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="User name"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               placeholder="Enter your full name here!"
             />
           </div>
-          <!-- Bio Field -->
+
           <div>
-            <label for="register-bio" class="block text-base font-medium"
+            <label
+              for="register-bio"
+              class="block text-base font-medium text-gray-200"
               >Bio</label
             >
             <textarea
               name="bio"
               id="register-bio"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Bio"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               placeholder="Tell us about yourself!"
             ></textarea>
           </div>
-          <!-- Email Field -->
+
           <div>
-            <label for="register-email" class="block text-base font-medium">
-              Email
-            </label>
+            <label
+              for="register-email"
+              class="block text-base font-medium text-gray-200"
+              >Email</label
+            >
             <input
               type="email"
               name="email"
               autocomplete="email"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Email address"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               id="register-email"
               placeholder="Enter your email here!"
             />
           </div>
-          <!-- Avatar URL Field -->
+
           <div>
-            <label for="register-avatarurl" class="block text-base font-medium"
+            <label
+              for="register-avatarurl"
+              class="block text-base font-medium text-gray-200"
               >Avatar URL</label
             >
             <input
@@ -123,13 +122,16 @@
               name="avatarurl"
               id="register-avatarurl"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Avatar URL"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               placeholder="Enter your avatar image URL"
             />
           </div>
-          <!-- Avatar Alt Text Field -->
+
           <div>
-            <label for="register-avataralt" class="block text-base font-medium"
+            <label
+              for="register-avataralt"
+              class="block text-base font-medium text-gray-200"
               >Avatar Alt Text</label
             >
             <input
@@ -137,13 +139,16 @@
               name="avataralt"
               id="register-avataralt"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Avatar Alt Text"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               placeholder="Enter alt text for your avatar"
             />
           </div>
-          <!-- Banner URL Field -->
+
           <div>
-            <label for="register-bannerurl" class="block text-base font-medium"
+            <label
+              for="register-bannerurl"
+              class="block text-base font-medium text-gray-200"
               >Banner URL</label
             >
             <input
@@ -151,13 +156,16 @@
               name="bannerurl"
               id="register-bannerurl"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Banner URL"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               placeholder="Enter the banner image URL"
             />
           </div>
-          <!-- Banner Alt Text Field -->
+
           <div>
-            <label for="register-banneralt" class="block text-base font-medium"
+            <label
+              for="register-banneralt"
+              class="block text-base font-medium text-gray-200"
               >Banner Alt Text</label
             >
             <input
@@ -165,33 +173,37 @@
               name="banneralt"
               id="register-banneralt"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Banner Alt Text"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               placeholder="Enter alt text for your banner"
             />
           </div>
-          <!-- Password Field -->
+
           <div>
-            <label for="register-password" class="block text-base font-medium">
-              Password
-            </label>
+            <label
+              for="register-password"
+              class="block text-base font-medium text-gray-200"
+              >Password</label
+            >
             <input
               type="password"
               name="password"
               required
-              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500"
+              aria-label="Password"
+              class="w-full px-4 py-3 mt-1 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"
               id="register-password"
               placeholder="Enter your password here!"
             />
           </div>
-          <!-- Login Button -->
+
           <button
             type="submit"
             class="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-amber-300"
           >
             Register
           </button>
-          <!-- Login Link -->
-          <p class="text-center">
+
+          <p class="text-center text-gray-200 mt-4">
             Already have an account?
             <a
               href="/auth/login/"
@@ -202,7 +214,6 @@
         </fieldset>
       </form>
     </main>
-    <!-- Footer -->
     <footer
       class="flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-teal-900 py-6 mt-10"
     >
