@@ -1,11 +1,11 @@
 import { API_AUTH_LOGIN } from "../constants";
 import { authGuard } from "../../utilities/authGuard.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  authGuard(true);
-});
 export async function login({ email, password }) {
   try {
+    // Directly invoke authGuard before performing the login
+    authGuard(true);
+
     const response = await fetch(API_AUTH_LOGIN, {
       method: "POST",
       headers: {
