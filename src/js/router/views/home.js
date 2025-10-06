@@ -35,7 +35,12 @@ export async function fetchAndDisplayListings(
     return;
   }
 
-  listingContainer.innerHTML = "<p>Loading listings...</p>";
+  // Loading state
+  listingContainer.innerHTML = `
+    <div class="text-center py-12 text-gray-500 animate-pulse">
+      Loading listings...
+    </div>
+  `;
 
   try {
     let url = urlBase;
@@ -58,7 +63,11 @@ export async function fetchAndDisplayListings(
     const listings = data.data;
 
     if (listings.length === 0) {
-      listingContainer.innerHTML = "<p>No listings available.</p>";
+      listingContainer.innerHTML = `
+        <div class="text-center py-12 text-gray-500 italic">
+          No listings available.
+        </div>
+      `;
       return;
     }
 
@@ -66,8 +75,11 @@ export async function fetchAndDisplayListings(
     setupSearch(listings);
   } catch (error) {
     console.error("Error fetching listings:", error);
-    listingContainer.innerHTML =
-      "<p>Failed to load listings. Please try again later.</p>";
+    listingContainer.innerHTML = `
+      <div class="text-center py-12 text-red-500">
+        Failed to load listings. Please try again later.
+      </div>
+    `;
   }
 }
 
@@ -80,14 +92,17 @@ function renderListings(listings) {
     listingElement.classList.add(
       "listing",
       "bg-white",
-      "rounded-lg",
-      "shadow-lg",
+      "rounded-xl",
+      "shadow-md",
       "overflow-hidden",
       "cursor-pointer",
+      "transform",
       "transition",
-      "hover:shadow-xl",
-      "transition-all",
+      "hover:scale-[1.02]",
+      "hover:shadow-lg",
       "duration-300",
+      "flex",
+      "flex-col",
     );
 
     const userVisibleTags =
@@ -96,25 +111,43 @@ function renderListings(listings) {
       listing._count?.bids > 0 ? "Bids available" : "No bids yet";
 
     listingElement.innerHTML = `
+      <!-- Image -->
       <div class="listing__image-container overflow-hidden relative group">
         ${
           listing.media?.[0]?.url
-            ? `<img src="${listing.media[0].url}" alt="${listing.media[0].alt || "Listing image"}" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" />`
-            : `<img src="/images/avatar-placeholder.png" alt="Placeholder image" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" />`
+            ? `<img src="${listing.media[0].url}" alt="${
+                listing.media[0].alt || "Listing image"
+              }" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500" />`
+            : `<img src="/images/avatar-placeholder.png" alt="Placeholder image" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500" />`
         }
       </div>
-      <div class="listing__content p-6 flex flex-col justify-between h-full">
-        <h3 class="listing__title text-xl font-semibold text-gray-800 hover:text-teal-600 transition-all duration-300">${listing.title || "No Title"}</h3>
-        <p class="listing__description text-gray-600 text-sm">${listing.description || "No description available."}</p>
-        <div class="listing__tags flex flex-wrap gap-2">
-          ${userVisibleTags
-            .map(
-              (tag) =>
-                `<span class="listing__tag inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">${tag}</span>`,
-            )
-            .join("")}
+
+      <!-- Content -->
+      <div class="listing__content p-5 flex flex-col justify-between flex-1">
+        <h3 class="listing__title text-lg font-semibold text-gray-800 mb-2 line-clamp-1 hover:text-teal-600 transition-colors">
+          ${listing.title || "No Title"}
+        </h3>
+        <p class="listing__description text-gray-600 text-sm mb-3 line-clamp-2">
+          ${listing.description || "No description available."}
+        </p>
+
+        <!-- Tags -->
+        <div class="listing__tags flex flex-wrap gap-2 mb-3">
+          ${
+            userVisibleTags.length
+              ? userVisibleTags
+                  .map(
+                    (tag) =>
+                      `<span class="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full hover:bg-blue-200 transition">${tag}</span>`,
+                  )
+                  .join("")
+              : `<span class="text-gray-400 italic text-xs">No tags</span>`
+          }
         </div>
-        <p class="listing__highest-bid text-sm font-semibold text-gray-700">${highestBid}</p>
+
+        <p class="listing__highest-bid text-sm font-semibold text-gray-700 mt-auto">
+          ${highestBid}
+        </p>
       </div>
     `;
 
@@ -150,6 +183,7 @@ function setupTagFilter() {
   }
 }
 
+// Init
 fetchAndDisplayListings(true);
 setupFilterToggle();
 setupTagFilter();
